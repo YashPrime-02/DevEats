@@ -189,6 +189,14 @@ body.dark .footer__map-link {
 }
 
 /* ===============================
+   DARK MODE – FOOTER LOGO FIX
+================================ */
+body.dark .footer__brand h3 {
+  color: #f7be27; /* Yellow brand color */
+}
+
+
+/* ===============================
    RESPONSIVE
 ================================ */
 @media (max-width: 768px) {
