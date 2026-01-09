@@ -1,0 +1,255 @@
+/* header css  */
+/* ===============================
+   NAVBAR BASE
+================================ */
+.navbar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.navbar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===============================
+   LOGO
+================================ */
+.navbar__logo {
+    font-family: "Lilita One", cursive;
+    font-size: 24px;
+    color: #e3000e;
+}
+
+/* ===============================
+   MENU LINKS
+================================ */
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+
+.navbar__menu a {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    position: relative;
+}
+
+
+/* Hover underline animation */
+.navbar__menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #e3000e;
+    transition: width 0.3s ease;
+}
+
+.navbar__menu a:hover::after {
+    width: 100%;
+}
+
+/* ===============================
+   HAMBURGER
+================================ */
+.navbar__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar__toggle span {
+    width: 24px;
+    height: 2px;
+    background: #000000;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation */
+.navbar__toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar__toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar__toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===============================
+   THEME TOGGLE BUTTON
+================================ */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+/* ===============================
+   LIGHT THEME (DEFAULT)
+================================ */
+body {
+    background-color: #ffffff;
+    color: #e3000e;
+}
+
+/* ===============================
+   DARK THEME
+================================ */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navbar dark */
+body.dark .navbar {
+    background-color: #1a1a1a;
+    border-bottom-color: #333;
+}
+
+body.dark .navbar__menu a {
+    color: #ffffff;
+}
+
+body.dark .navbar__menu a::after {
+    background: #f7be27;
+}
+
+body.dark .navbar__toggle span {
+    background: #ffffff;
+}
+
+body.dark .navbar__logo {
+    color: #f7be27;
+}
+
+
+@media (max-width: 768px) {
+
+    /* Tighter navbar padding */
+    .navbar__container {
+        padding: 12px 16px;
+    }
+
+    /* Action buttons group */
+    .navbar__actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Theme toggle (mobile) */
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 18px;
+        line-height: 1;
+        margin-right: 0;
+    }
+
+    /* Hamburger (mobile) */
+    .navbar__toggle {
+        display: flex;
+
+        width: 36px;
+        height: 36px;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hamburger bars tighter */
+    .navbar__toggle span {
+        width: 22px;
+        height: 2px;
+    }
+
+    /* Mobile menu */
+    .navbar__menu {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+
+
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+
+        padding: 24px 0;
+
+        opacity: 0;
+        transform: translateY(-14px);
+        pointer-events: none;
+
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    /* ===============================
+   MOBILE MENU – LIGHT GLASS
+================================ */
+    .navbar__menu {
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+
+    .navbar__menu.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .navbar__menu a {
+        font-size: 16px;
+        padding: 8px 4px;
+    }
+
+    body.dark .navbar__menu {
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        /* Safari support */
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+}
+
+@media (max-width: 768px) {
+    .navbar__logo {
+        font-size: 20px;
+        text-align: center;
+        flex: 1;
+    }
+}

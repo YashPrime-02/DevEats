@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Oswald:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap");
+
+/* ===============================
+   RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column; /* 🔑 FIX */
+  min-height: 100vh;
+}
+
+
+/* ===============================
+   BASE HTML / BODY
+================================ */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #e3000e;          
+  background-color: #ffffff;
+}
+
+/* ===============================
+   TYPOGRAPHY HELPERS (OPTIONAL)
+================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+}
+
+p{
+ font-size: 14px;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+
+  /* Smooth transition (all engines) */
+  -webkit-transition: color 0.2s ease; 
+  -moz-transition: color 0.2s ease;    
+  -ms-transition: color 0.2s ease;     
+  -o-transition: color 0.2s ease;      
+  transition: color 0.2s ease;         
+}
+
+a:hover,
+a:focus {
+  color: #000000;
+  text-decoration: none;
+}
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #bdbdbd;
+  border-radius: 8px;
+
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+/* Scrollbar thumb on hover / active (scrolling) */
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background-color: #000000;
+}
+
+
+/* ===============================
+   COMMON ORDER NOW BUTTON
+================================ */
+.order-now {
+  display: inline-flex;               
+  align-items: center;                
+  justify-content: center;
+
+  padding: 15px 38px;
+  background-color: #f7be27;          /* yellow */
+  border: 2px solid #f7be27;
+  color: #333333;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;              /* supports <a> */
+
+  /* Smooth transition (all engines) */
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.order-now:hover {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #333333;
+}
+
+/* Focus (keyboard accessibility) */
+.order-now:focus,
+.order-now:focus-visible {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #333333;
+  box-shadow: 0 0 0 3px rgba(247, 190, 39, 0.5);
+}
+
+/* Active (click feedback) */
+.order-now:active {
+  transform: scale(0.96);
+}
+
+
+/* ===============================
+   RED BUTTON
+================================ */
+.btn_red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 36px;
+  background-color: #e3000e;
+  border: 2px solid #e3000e;
+  color: #ffffff;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.btn_red:hover {
+  background-color: #b8000b;
+  border-color: #b8000b;
+  color: #ffffff;
+}
+
+/* Focus (keyboard users) */
+.btn_red:focus,
+.btn_red:focus-visible {
+  background-color: #b8000b;
+  border-color: #b8000b;
+  box-shadow: 0 0 0 3px rgba(227, 0, 14, 0.4);
+}
+
+/* Active (click feedback) */
+.btn_red:active {
+  transform: scale(0.96);
+}
+
+
