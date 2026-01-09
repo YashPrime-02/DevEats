@@ -186,6 +186,7 @@ body.dark .footer__bottom {
 
 body.dark .footer__map-link {
   color: #f7be27;
+  text-decoration: none;
 }
 
 /* ===============================
@@ -207,6 +208,11 @@ body.dark .footer__brand h3 {
 
   .footer__social {
     justify-content: center;
+  }
+
+  .footer__links a::after
+  {
+    display: none;
   }
 }
 /* ===============================
@@ -244,7 +250,7 @@ body.dark .footer__social a:focus-visible {
   bottom: -3px;
   width: 0;
   height: 1px;
-  background: #e3000e;
+  background: #f7be27;
   transition: width 0.25s ease;
 }
 

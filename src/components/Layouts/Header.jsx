@@ -4,6 +4,26 @@ import "../../styles/Header.css";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Scroll effects
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const progress = (scrollTop / docHeight) * 100;
+
+      setScrollProgress(progress);
+      setScrolled(scrollTop > 80);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Load saved theme
   useEffect(() => {
@@ -23,45 +43,53 @@ export default function Header() {
   };
 
   return (
-    <header className="navbar">
-      <div className="navbar__container">
-        {/* Logo */}
-        <div className="navbar__logo">YOMATO Food Delivery</div>
+    <>
+      {/* Scroll progress bar */}
+      <div
+        className="scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+      />
 
-        {/* Right controls */}
-        <div className="navbar__actions">
-          {/* Theme toggle */}
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
-            {darkMode ? "☀️" : "🌙"}
-          </button>
+      <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
+        <div className="navbar__container">
+          <div className="navbar__logo">YOMATO Food Delivery</div>
 
-          {/* Hamburger */}
-          <button
-            className={`navbar__toggle ${open ? "active" : ""}`}
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          <div className="navbar__actions">
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {darkMode ? "☀️" : "🌙"}
+            </button>
+
+            <button className="cart-button" aria-label="Cart with 3 items">
+              <i className="fa-solid fa-cart-shopping"></i>
+              <span className="cart-badge">3</span>
+            </button>
+
+            <button
+              className={`navbar__toggle ${open ? "active" : ""}`}
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+
+          <nav className={`navbar__menu ${open ? "open" : ""}`}>
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/offers">Offers</a>
+            <a href="/contact">Contact</a>
+            <a href="/order" className="order-now">
+              Order Now
+            </a>
+          </nav>
         </div>
-
-        {/* Menu */}
-        <nav className={`navbar__menu ${open ? "open" : ""}`}>
-          <a href="/">Home</a>
-          <a href="/menu">Menu</a>
-          <a href="/offers">Offers</a>
-          <a href="/contact">Contact</a>
-          <a href="/order" className="order-now">
-            Order Now
-          </a>
-        </nav>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
