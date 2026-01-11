@@ -208,6 +208,89 @@ body.dark .food-menu__subtitle {
     color: rgba(255, 255, 255, 0.75);
 }
 
+.food-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.food-tag.veg {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.food-tag.non-veg {
+  background: #fdecea;
+  color: #c62828;
+}
+
+body.dark .food-tag.veg {
+  background: rgba(30, 126, 52, 0.2);
+  color: #7dffb3;
+}
+
+body.dark .food-tag.non-veg {
+  background: rgba(198, 40, 40, 0.25);
+  color: #ff9a9a;
+}
+
+/* ===============================
+   FOOD FILTER TOGGLE
+================================ */
+.food-filter {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.food-filter__btn {
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.food-filter__btn:hover {
+  transform: translateY(-1px);
+}
+
+.food-filter__btn.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.food-filter__btn.veg.active {
+  background: #1e7e34;
+  border-color: #1e7e34;
+}
+
+.food-filter__btn.non-veg.active {
+  background: #c62828;
+  border-color: #c62828;
+}
+
+/* Dark mode */
+body.dark .food-filter__btn {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #ffffff;
+}
+
+body.dark .food-filter__btn.active {
+  background: #f7be27;
+  color: #000000;
+  border-color: #f7be27;
+}
+
 
 /* ===============================
    RESPONSIVE

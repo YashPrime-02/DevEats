@@ -13,69 +13,93 @@ const menuData = [
   {
     image: burger_1,
     rating: "★★★★★",
-    title: "Crispy Chicken",
-    desc: "Chicken breast, chilli sauce, tomatoes, pickles, coleslaw",
-    price: "₹99.15",
+    title: "Butter Chicken Burger",
+    desc: "Creamy butter chicken patty with onion, lettuce and makhani sauce",
+    price: "₹179.00",
+    type: "non-veg",
+    category: "burger",
   },
   {
     image: burger_2,
     rating: "★★★★★",
-    title: "Ultimate Bacon Burger",
-    desc: "Juicy beef patty layered with crispy bacon, cheddar cheese, caramelized onions and house sauce",
-    price: "₹189.00",
+    title: "Paneer Tikka Burger",
+    desc: "Grilled paneer tikka with mint mayo and fresh veggies",
+    price: "₹159.00",
+    type: "veg",
+    category: "burger",
   },
   {
     image: burger_3,
     rating: "★★★★★",
-    title: "Crispy Chicken Burger",
-    desc: "Crunchy fried chicken fillet with lettuce, pickles and spicy mayo in a toasted bun",
-    price: "₹169.00",
+    title: "Chicken Tandoori Burger",
+    desc: "Smoky tandoori chicken with onions and spicy mayo",
+    price: "₹189.00",
+    type: "non-veg",
+    category: "burger",
   },
   {
     image: burger_4,
     rating: "★★★★☆",
-    title: "Classic Veg Burger",
-    desc: "Golden veg patty with fresh lettuce, tomatoes, onions and creamy mayo",
-    price: "₹139.00",
+    title: "Aloo Tikki Burger",
+    desc: "Crispy aloo tikki with tomato, onion and desi chutneys",
+    price: "₹129.00",
+    type: "veg",
+    category: "burger",
   },
   {
     image: burger_5,
     rating: "★★★★★",
-    title: "Double Cheese Burger",
-    desc: "Two layers of melted cheese, beef patty, onions and signature burger sauce",
-    price: "₹199.00",
+    title: "Cheese Burst Paneer Burger",
+    desc: "Paneer patty filled with molten cheese and creamy sauce",
+    price: "₹189.00",
+    type: "veg",
+    category: "burger",
   },
   {
     image: burger_6,
     rating: "★★★★☆",
-    title: "Spicy Chicken Burger",
-    desc: "Spicy grilled chicken with jalapeños, lettuce and fiery peri-peri sauce",
-    price: "₹179.00",
+    title: "Peri Peri Chicken Burger",
+    desc: "Spicy peri peri grilled chicken with lettuce and mayo",
+    price: "₹199.00",
+    type: "non-veg",
+    category: "burger",
   },
   {
     image: burger_7,
     rating: "★★★★★",
-    title: "Mushroom Swiss Burger",
-    desc: "Beef patty topped with sautéed mushrooms, swiss cheese and garlic aioli",
-    price: "₹209.00",
+    title: "Mushroom Masala Burger",
+    desc: "Indian spiced mushroom patty with garlic aioli",
+    price: "₹169.00",
+    type: "veg",
+    category: "burger",
   },
   {
     image: burger_8,
     rating: "★★★★☆",
-    title: "BBQ Chicken Burger",
-    desc: "Grilled chicken breast glazed with BBQ sauce, onions and cheddar cheese",
-    price: "₹189.00",
+    title: "BBQ Chicken Keema Burger",
+    desc: "Minced chicken patty glazed with BBQ sauce",
+    price: "₹209.00",
+    type: "non-veg",
+    category: "burger",
   },
   {
     image: burger_1,
     rating: "★★★★☆",
-    title: "Vegan Plant Burger",
-    desc: "Plant-based patty with avocado, lettuce, tomato and dairy-free sauce",
+    title: "Veg Maharaja Burger",
+    desc: "Double veg patty with cheese, lettuce and special sauce",
     price: "₹179.00",
+    type: "veg",
+    category: "burger",
   },
 ];
 
 export default function Home_menu() {
+  const [foodFilter, setFoodFilter] = useState("all");
+  const filteredMenu =
+    foodFilter === "all"
+      ? menuData
+      : menuData.filter((item) => item.type === foodFilter);
+
   // ✅ INITIALIZE FROM LOCALSTORAGE (KEY FIX)
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
@@ -106,9 +130,36 @@ export default function Home_menu() {
             of delicious meals made with fresh ingredients and bold flavors.
           </p>
         </div>
+        <div className="food-filter">
+          <button
+            className={`food-filter__btn ${
+              foodFilter === "all" ? "active" : ""
+            }`}
+            onClick={() => setFoodFilter("all")}
+          >
+            All
+          </button>
 
+          <button
+            className={`food-filter__btn veg ${
+              foodFilter === "veg" ? "active" : ""
+            }`}
+            onClick={() => setFoodFilter("veg")}
+          >
+            Veg
+          </button>
+
+          <button
+            className={`food-filter__btn non-veg ${
+              foodFilter === "non-veg" ? "active" : ""
+            }`}
+            onClick={() => setFoodFilter("non-veg")}
+          >
+            Non-Veg
+          </button>
+        </div>
         <div className="food-grid">
-          {menuData.map((item, index) => (
+          {filteredMenu.map((item, index) => (
             <article className="food-card" key={index}>
               <div className="food-card__image">
                 <img src={item.image} alt={item.title} />
@@ -122,6 +173,15 @@ export default function Home_menu() {
 
               <div className="food-card__body">
                 <div className="food-card__rating">{item.rating}</div>
+
+                <span
+                  className={`food-tag ${
+                    item.type === "veg" ? "veg" : "non-veg"
+                  }`}
+                >
+                  {item.type === "veg" ? "VEG" : "NON-VEG"}
+                </span>
+
                 <h3 className="food-card__title">{item.title}</h3>
                 <p className="food-card__desc">{item.desc}</p>
                 <span className="food-card__price">{item.price}</span>
