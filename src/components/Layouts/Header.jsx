@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/Header.css";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -70,7 +71,9 @@ export default function Header() {
 
       <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
         <div className="navbar__container">
-          <div className="navbar__logo">YOMATO Food Delivery</div>
+          <Link to="/" className="navbar__logo">
+            YOMATO Food Delivery
+          </Link>
 
           <div className="navbar__actions">
             <button

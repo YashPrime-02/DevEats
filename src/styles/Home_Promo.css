@@ -1,0 +1,92 @@
+/* ===============================
+   PROMO SECTION
+================================ */
+.promo {
+  padding: 72px 24px;
+  background: #ffffff;
+}
+
+body.dark .promo {
+  background: #121212;
+}
+
+.promo__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* ===============================
+   PROMO CARD
+================================ */
+.promo__card {
+  background: #f8efdf;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  gap: 24px;
+  overflow: hidden;
+}
+
+body.dark .promo__card {
+  background: #1f1f1f;
+}
+
+.promo__card img {
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.promo__content h3 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+
+.promo__content h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.promo__content button {
+  background: #e10600;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo__content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .promo__container {
+    grid-template-columns: 1fr;
+  }
+
+  .promo__card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .promo__card img {
+    width: 160px;
+  }
+}

@@ -2,6 +2,7 @@ import Layout from "../../components/Layouts/Layouts";
 import Hero from "./Hero";
 import Home_about from "./Home_About";
 import Home_menu from "./Home_menu";
+import Home_Promo from "./Home_Promo";
 
 export default function Home() {
   return (
@@ -13,6 +14,10 @@ export default function Home() {
       {<Home_about/>}
       {/* Home's Menu Section  */}
       {<Home_menu/>}
+      {/* Home's Promo Section  */}
+      {<Home_Promo/>}
+
+
       
       
 

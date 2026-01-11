@@ -1,5 +1,6 @@
 import React from "react";
 import "../../styles/Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -7,7 +8,10 @@ export default function Footer() {
       <div className="footer__container">
         {/* Brand */}
         <div className="footer__brand">
-          <h3>YOMATO Food Delivery</h3>
+          <Link to="/" className="footer__brand-link">
+            <h3>YOMATO Food Delivery</h3>
+          </Link>
+
           <p>Cravings delivered at your doorstep.</p>
 
           <div className="footer__social">
