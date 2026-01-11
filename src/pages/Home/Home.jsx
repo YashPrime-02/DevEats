@@ -1,12 +1,20 @@
 import Layout from "../../components/Layouts/Layouts";
-import Section1 from "./Section1";
+import Hero from "./Hero";
+import Home_about from "./Home_About";
+import Home_menu from "./Home_menu";
 
 export default function Home() {
   return (
     <Layout>
       
       {/* Hero Section  */}
-      {<Section1/>}
+      {<Hero/>}
+      {/* Home's About Section  */}
+      {<Home_about/>}
+      {/* Home's Menu Section  */}
+      {<Home_menu/>}
+      
+      
 
     </Layout>
   );

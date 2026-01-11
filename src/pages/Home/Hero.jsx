@@ -1,6 +1,6 @@
 import React from "react";
 import Burger from "../../assets/hero/hero-2.png";
-import "../../styles/Section1.css";
+import "../../styles/Hero.css";
 import Hero from "../../assets/hero/hero-1.jpg";
 
 export default function Section1() {

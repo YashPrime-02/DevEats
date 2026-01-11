@@ -1,0 +1,267 @@
+/* =========================================================
+   MENU / ABOUT SECTION
+========================================================= */
+.menu-section {
+    background:
+        radial-gradient(circle at top center,
+            rgba(247, 190, 39, 0.22),
+            rgba(0, 0, 0, 0) 55%),
+        #ffffff;
+    padding: 96px 24px;
+    color: #000000;
+    overflow: hidden;
+}
+
+body.dark .menu-section {
+    background:
+        radial-gradient(circle at top center,
+            rgba(247, 190, 39, 0.18),
+            rgba(0, 0, 0, 0) 55%),
+        #121212;
+    color: #ffffff;
+}
+
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.menu-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.menu-title {
+    font-family: "Oswald", sans-serif;
+    font-size: 56px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: #000000;
+}
+
+body.dark .menu-title {
+    color: #ffffff;
+}
+
+.menu-subtitle {
+    max-width: 760px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.85;
+    font-family: "Oswald", sans-serif;
+
+}
+
+/* =========================================================
+   TESTIMONIAL CAROUSEL
+========================================================= */
+.menu-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: menuAutoScroll 32s linear infinite;
+}
+
+.menu-carousel:hover .menu-track {
+    animation-play-state: paused;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+.menu-card {
+    width: 320px;
+    flex-shrink: 0;
+    padding: 24px;
+    border-radius: 20px;
+
+    background: rgba(245, 245, 245, 0.72);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+    border-color: #f7be27;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+body.dark .menu-card {
+    background: rgba(26, 26, 26, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 10px 32px rgba(0, 0, 0, 0.85),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.dark .menu-card:hover {
+    border-color: #f7be27;
+}
+
+/* Text */
+.card-title {
+    font-family: "Oswald", sans-serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+/* =========================================================
+   AUTO SCROLL
+========================================================= */
+@keyframes menuAutoScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================================================
+   FEATURES (BURGER STRIP + ICONS)
+========================================================= */
+.features {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.features__content {
+    background: #f7be27;
+    padding: 64px 24px;
+}
+
+body.dark .features__content {
+    background: radial-gradient(circle at top center,
+            rgba(247, 190, 39, 0.18),
+            rgba(0, 0, 0, 0) 55%),
+        #121212;
+    padding: 64px 24px;
+}
+
+.features__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    text-align: center;
+}
+
+.feature {
+    padding: 24px;
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+
+.feature:hover {
+    transform: translateY(-4px);
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+}
+
+.feature__icon img {
+    width: 48px;
+    margin-bottom: 16px;
+
+    background-color: transparent;
+    mix-blend-mode: multiply;
+}
+
+.feature__title {
+    font-family: "Oswald", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: #000000;
+}
+
+.feature__text {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 992px) {
+    .menu-title {
+        font-size: 44px;
+    }
+
+    .menu-track {
+        animation-duration: 40s;
+    }
+
+    .features__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .features__image-strip {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .menu-section {
+        padding: 64px 16px;
+    }
+
+    .menu-title {
+        font-size: 36px;
+    }
+
+    .menu-card {
+        width: 260px;
+    }
+
+    .features__content {
+        padding: 48px 16px;
+    }
+
+    .features__image-strip img {
+        width: 220px;
+    }
+}

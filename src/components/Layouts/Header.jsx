@@ -34,6 +34,24 @@ export default function Header() {
     }
   }, []);
 
+  const [cartCount, setCartCount] = useState(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    return cart.length;
+  });
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      setCartCount(cart.length);
+    };
+
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
+  }, []);
+
   // Toggle theme
   const toggleTheme = () => {
     document.body.classList.toggle("dark");
@@ -63,9 +81,9 @@ export default function Header() {
               {darkMode ? "☀️" : "🌙"}
             </button>
 
-            <button className="cart-button" aria-label="Cart with 3 items">
+            <button className="cart-button" aria-label="Cart">
               <i className="fa-solid fa-cart-shopping"></i>
-              <span className="cart-badge">3</span>
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
             </button>
 
             <button
