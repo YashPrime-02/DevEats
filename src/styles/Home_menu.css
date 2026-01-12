@@ -209,86 +209,86 @@ body.dark .food-menu__subtitle {
 }
 
 .food-tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-bottom: 6px;
 }
 
 .food-tag.veg {
-  background: #e6f4ea;
-  color: #1e7e34;
+    background: #e6f4ea;
+    color: #1e7e34;
 }
 
 .food-tag.non-veg {
-  background: #fdecea;
-  color: #c62828;
+    background: #fdecea;
+    color: #c62828;
 }
 
 body.dark .food-tag.veg {
-  background: rgba(30, 126, 52, 0.2);
-  color: #7dffb3;
+    background: rgba(30, 126, 52, 0.2);
+    color: #7dffb3;
 }
 
 body.dark .food-tag.non-veg {
-  background: rgba(198, 40, 40, 0.25);
-  color: #ff9a9a;
+    background: rgba(198, 40, 40, 0.25);
+    color: #ff9a9a;
 }
 
 /* ===============================
    FOOD FILTER TOGGLE
 ================================ */
 .food-filter {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
 }
 
 .food-filter__btn {
-  padding: 10px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #ddd;
-  background: #ffffff;
-  cursor: pointer;
-  transition: all 0.25s ease;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
 .food-filter__btn:hover {
-  transform: translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .food-filter__btn.active {
-  background: #000000;
-  color: #ffffff;
-  border-color: #000000;
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
 }
 
 .food-filter__btn.veg.active {
-  background: #1e7e34;
-  border-color: #1e7e34;
+    background: #1e7e34;
+    border-color: #1e7e34;
 }
 
 .food-filter__btn.non-veg.active {
-  background: #c62828;
-  border-color: #c62828;
+    background: #c62828;
+    border-color: #c62828;
 }
 
 /* Dark mode */
 body.dark .food-filter__btn {
-  background: #1a1a1a;
-  border-color: #333;
-  color: #ffffff;
+    background: #1a1a1a;
+    border-color: #333;
+    color: #ffffff;
 }
 
 body.dark .food-filter__btn.active {
-  background: #f7be27;
-  color: #000000;
-  border-color: #f7be27;
+    background: #f7be27;
+    color: #000000;
+    border-color: #f7be27;
 }
 
 
@@ -315,4 +315,90 @@ body.dark .food-filter__btn.active {
     .food-menu__subtitle {
         font-size: 16px;
     }
+}
+
+
+/* ===============================
+   FOOD MENU – ACCESSIBILITY LAYER
+   (Append-only, zero layout impact)
+================================ */
+
+/* Keyboard focus visibility */
+.food-menu button:focus-visible,
+.food-menu a:focus-visible {
+    outline: 3px solid #f7be27;
+    outline-offset: 4px;
+}
+
+body.dark .food-menu button:focus-visible,
+body.dark .food-menu a:focus-visible {
+    outline-color: #f7be27;
+}
+
+
+/* Improve filter toggle accessibility */
+.food-filter__btn {
+    min-height: 44px; /* WCAG touch target */
+    min-width: 44px;
+}
+
+.food-filter__btn:focus-visible {
+    outline: 3px solid #1e7e34;
+    outline-offset: 4px;
+}
+
+.food-filter__btn.non-veg:focus-visible {
+    outline-color: #c62828;
+}
+
+
+/* Ensure CTA remains readable on image blur */
+.food-card:hover .food-card__cta {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .food-card,
+    .food-card__image img,
+    .food-card__cta,
+    .food-filter__btn {
+        transition: none;
+    }
+
+    .food-card:hover {
+        transform: none;
+    }
+}
+
+
+/* High contrast support */
+@media (prefers-contrast: more) {
+    .food-card__title,
+    .food-card__desc {
+        color: #000000;
+    }
+
+    body.dark .food-card__title,
+    body.dark .food-card__desc {
+        color: #ffffff;
+    }
+
+    .food-filter__btn {
+        border-width: 2px;
+    }
+}
+
+
+/* Image safety for zoom (WCAG 1.4.4) */
+.food-card__image img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Improve readability when overlay is active */
+.food-card__image::after {
+    pointer-events: none;
 }

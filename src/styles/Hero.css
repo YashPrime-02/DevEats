@@ -135,3 +135,91 @@
     font-size: 22px;
   }
 }
+
+/* =========================================================
+   HERO SECTION – ACCESSIBILITY LAYER
+   (Append-only, zero visual regression)
+========================================================= */
+
+/* ---------------------------------
+   Keyboard focus visibility
+---------------------------------- */
+.hero a:focus-visible,
+.hero button:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+
+/* ---------------------------------
+   Improve text contrast consistency
+---------------------------------- */
+.hero__content p,
+.hero__content h3 {
+  opacity: 1;
+}
+
+
+/* ---------------------------------
+   Price badge readability
+---------------------------------- */
+.hero__price-badge {
+  text-align: center;
+}
+
+
+/* ---------------------------------
+   Reduced motion support
+---------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero *,
+  .hero *::before,
+  .hero *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ---------------------------------
+   Touch target sizing (WCAG 2.5.5)
+---------------------------------- */
+.hero button,
+.hero a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+
+/* ---------------------------------
+   Prevent image overflow on zoom
+---------------------------------- */
+.hero__image {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ---------------------------------
+   High contrast preference
+---------------------------------- */
+@media (prefers-contrast: more) {
+  .hero__content h1,
+  .hero__content h3,
+  .hero__content p {
+    color: #ffffff;
+  }
+
+  .hero__price-badge {
+    border: 2px solid #000000;
+  }
+}
+
+
+/* ---------------------------------
+   Screen reader clarity
+---------------------------------- */
+.hero__price-badge span,
+.hero__price-badge strong {
+  line-height: 1.2;
+}

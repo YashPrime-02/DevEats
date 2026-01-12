@@ -90,3 +90,58 @@ body.dark .promo__card {
     width: 160px;
   }
 }
+
+/* ===============================
+   PROMO ACCESSIBILITY LAYER
+   (Append-only, no layout impact)
+================================ */
+
+/* Focus visibility for keyboard users */
+.promo button:focus-visible,
+.promo a:focus-visible {
+  outline: 3px solid #e10600;
+  outline-offset: 4px;
+}
+
+body.dark .promo button:focus-visible,
+body.dark .promo a:focus-visible {
+  outline-color: #f7be27;
+}
+
+
+/* Reduce motion for motion-sensitive users */
+@media (prefers-reduced-motion: reduce) {
+  .promo__content button {
+    transition: none;
+  }
+}
+
+
+/* Improve contrast for high-contrast preference users */
+@media (prefers-contrast: more) {
+  .promo__content h2,
+  .promo__content h3 {
+    color: #000000;
+  }
+
+  body.dark .promo__content h2,
+  body.dark .promo__content h3 {
+    color: #ffffff;
+  }
+}
+
+
+/* Ensure images scale safely on zoom (WCAG 1.4.4) */
+.promo__card img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Improve tap targets for touch devices */
+@media (pointer: coarse) {
+  .promo__content button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

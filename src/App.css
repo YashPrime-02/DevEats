@@ -228,3 +228,118 @@ a:focus {
 }
 
 
+/* =========================================================
+   GLOBAL ACCESSIBILITY LAYER
+   (Append-only – no visual regression)
+========================================================= */
+
+/* ---------------------------------------------------------
+   1. Keyboard focus visibility (WCAG 2.4.7)
+---------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   2. Improve focus visibility on dark backgrounds
+---------------------------------------------------------- */
+body.dark a:focus-visible,
+body.dark button:focus-visible {
+  outline-color: #f7be27;
+}
+
+
+/* ---------------------------------------------------------
+   3. Ensure minimum touch target size (WCAG 2.5.5)
+---------------------------------------------------------- */
+a,
+button {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+
+/* ---------------------------------------------------------
+   4. Prevent text opacity from reducing readability
+---------------------------------------------------------- */
+p,
+span,
+li {
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   5. Reduced motion support (WCAG 2.3.3)
+---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   6. High contrast user preference support
+---------------------------------------------------------- */
+@media (prefers-contrast: more) {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  a {
+    color: #ffffff;
+  }
+
+  .order-now,
+  .btn_red {
+    border-width: 3px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   7. Prevent layout break on zoom (WCAG 1.4.4)
+---------------------------------------------------------- */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ---------------------------------------------------------
+   8. Scrollbar contrast for accessibility
+---------------------------------------------------------- */
+@media (prefers-contrast: more) {
+  ::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   9. Remove hover-only reliance (keyboard parity)
+---------------------------------------------------------- */
+a:hover,
+a:focus-visible,
+button:hover,
+button:focus-visible {
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   10. Screen-reader clarity for icon-only elements
+---------------------------------------------------------- */
+i[aria-hidden="true"] {
+  pointer-events: none;
+}

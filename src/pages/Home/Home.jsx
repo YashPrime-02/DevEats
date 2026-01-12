@@ -3,24 +3,21 @@ import Hero from "./Hero";
 import Home_about from "./Home_About";
 import Home_menu from "./Home_menu";
 import Home_Promo from "./Home_Promo";
+import Parallax from "./Parallax";
 
 export default function Home() {
   return (
     <Layout>
-      
       {/* Hero Section  */}
-      {<Hero/>}
+      {<Hero />}
       {/* Home's About Section  */}
-      {<Home_about/>}
+      {<Home_about />}
       {/* Home's Menu Section  */}
-      {<Home_menu/>}
+      {<Home_menu />}
       {/* Home's Promo Section  */}
-      {<Home_Promo/>}
-
-
-      
-      
-
+      {<Home_Promo />}
+      {/* Home's Parallax Section  */}
+      {<Parallax/>}
     </Layout>
   );
 }
