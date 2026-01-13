@@ -107,11 +107,10 @@ export default function Header() {
           <nav className={`navbar__menu ${open ? "open" : ""}`}>
             <a href="/">Home</a>
             <Link to="/menu">Explore Full Menu</Link>
-            <a href="/offers">Offers</a>
-            <a href="/contact">Contact</a>
-            <a href="/order" className="order-now">
+            <Link to="/contact">Contact</Link>
+            <Link to="/menu" className="order-now">
               Order Now
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
