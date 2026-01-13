@@ -41,7 +41,7 @@ export default function Section1() {
             </p>
 
             <a href="/order" className="order-now">
-              Order Now
+              Contact Us For Bookings
             </a>
           </div>
         </div>

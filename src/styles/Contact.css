@@ -1,0 +1,222 @@
+/* ===============================
+   CONTACT BASE
+================================ */
+.contact {
+  padding: 96px 24px;
+  background: #ffffff;
+}
+
+body.dark .contact {
+  background: #121212;
+}
+
+.contact__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.contact__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.contact__header h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 48px;
+}
+
+.contact__header p {
+  max-width: 520px;
+  margin: 12px auto 0;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* ===============================
+   GRID
+================================ */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+}
+
+/* ===============================
+   FORM CARD
+================================ */
+.contact__form {
+  background: #f8f8f8;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact__form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+}
+
+body.dark .contact__form {
+  background: #1f1f1f;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* ===============================
+   FORM FIELDS
+================================ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #f7be27;
+  box-shadow: 0 0 0 3px rgba(247, 190, 39, 0.25);
+}
+
+body.dark .form-group input,
+body.dark .form-group textarea {
+  background: #121212;
+  border-color: #333;
+  color: #ffffff;
+}
+
+/* Validation states */
+.form-group input[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+  border-color: #e3000e;
+}
+
+.form-group input[aria-invalid="false"],
+.form-group textarea[aria-invalid="false"] {
+  border-color: #2e7d32;
+}
+
+/* ===============================
+   ERROR TEXT
+================================ */
+.error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #e3000e;
+  animation: errorFadeIn 0.25s ease;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===============================
+   INFO CARD (TYPOGRAPHY FIX)
+================================ */
+.contact__info {
+  padding: 36px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(247, 190, 39, 0.10),
+    rgba(247, 190, 39, 0.02)
+  );
+}
+
+body.dark .contact__info {
+  background: linear-gradient(
+    135deg,
+    rgba(247, 190, 39, 0.15),
+    rgba(0, 0, 0, 0.35)
+  );
+}
+
+/* Heading */
+.contact__info h3 {
+  font-family: "Oswald", sans-serif;
+  font-size: 22px;          /* ✅ bigger */
+  letter-spacing: 0.5px;
+  margin-bottom: 18px;
+}
+
+/* Brand / strong text */
+.contact__info p strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Paragraph text */
+.contact__info p {
+  font-family: "Roboto", sans-serif;
+  font-size: 15.5px;        /* ✅ increased */
+  line-height: 1.7;         /* ✅ better readability */
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   BUTTON STATES
+================================ */
+.order-now:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact__header h2 {
+    font-size: 36px;
+  }
+
+  .contact__form,
+  .contact__info {
+    padding: 24px;
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+.contact input:focus-visible,
+.contact textarea:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -197,6 +197,95 @@ body.dark .footer__brand h3 {
 }
 
 
+
+/* ===============================
+   SCROLL TO TOP BUTTON
+================================ */
+.scroll_top {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 999;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  background: #f7be27;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.scroll_top img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Hover */
+.scroll_top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+/* Active */
+.scroll_top:active {
+  transform: scale(0.92);
+}
+
+/* Focus (keyboard accessibility) */
+.scroll_top:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 4px;
+}
+
+/* Dark mode */
+body.dark .scroll_top {
+  background: #f7be27;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .scroll_top {
+    right: 20px;
+    bottom: 20px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .scroll_top img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll_top {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .scroll_top {
+    transition: none;
+  }
+}
+
+
 /* ===============================
    RESPONSIVE
 ================================ */
