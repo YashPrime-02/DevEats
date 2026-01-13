@@ -209,7 +209,7 @@ body.dark .story-section button:focus-visible {
 @media (pointer: coarse) {
   .story-section a,
   .story-section button {
-    min-height: 44px;
+    min-height: 36px;
     min-width: 44px;
   }
 }

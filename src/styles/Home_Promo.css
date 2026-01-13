@@ -141,7 +141,7 @@ body.dark .promo a:focus-visible {
 /* Improve tap targets for touch devices */
 @media (pointer: coarse) {
   .promo__content button {
-    min-height: 44px;
+    min-height: 36px;
     min-width: 44px;
   }
 }

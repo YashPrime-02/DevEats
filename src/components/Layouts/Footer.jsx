@@ -48,7 +48,7 @@ export default function Footer() {
         <div className="footer__links">
           <h4>Explore</h4>
           <a href="/">Home</a>
-          <a href="/menu">Menu</a>
+          <Link to="/menu">Explore Full Menu</Link>
           <a href="/offers">Offers</a>
           <a href="/contact">Contact</a>
         </div>

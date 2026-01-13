@@ -338,7 +338,7 @@ body.dark .food-menu a:focus-visible {
 
 /* Improve filter toggle accessibility */
 .food-filter__btn {
-    min-height: 44px; /* WCAG touch target */
+    min-height: 36px;
     min-width: 44px;
 }
 

@@ -15,7 +15,7 @@ const menuData = [
     rating: "★★★★★",
     title: "Butter Chicken Burger",
     desc: "Creamy butter chicken patty with onion, lettuce and makhani sauce",
-    price: "₹179.00",
+    price: "179.00",
     type: "non-veg",
     category: "burger",
   },
@@ -24,7 +24,7 @@ const menuData = [
     rating: "★★★★★",
     title: "Paneer Tikka Burger",
     desc: "Grilled paneer tikka with mint mayo and fresh veggies",
-    price: "₹159.00",
+    price: "159.00",
     type: "veg",
     category: "burger",
   },
@@ -33,7 +33,7 @@ const menuData = [
     rating: "★★★★★",
     title: "Chicken Tandoori Burger",
     desc: "Smoky tandoori chicken with onions and spicy mayo",
-    price: "₹189.00",
+    price: "189.00",
     type: "non-veg",
     category: "burger",
   },
@@ -42,7 +42,7 @@ const menuData = [
     rating: "★★★★☆",
     title: "Aloo Tikki Burger",
     desc: "Crispy aloo tikki with tomato, onion and desi chutneys",
-    price: "₹129.00",
+    price: "129.00",
     type: "veg",
     category: "burger",
   },
@@ -51,7 +51,7 @@ const menuData = [
     rating: "★★★★★",
     title: "Cheese Burst Paneer Burger",
     desc: "Paneer patty filled with molten cheese and creamy sauce",
-    price: "₹189.00",
+    price: "189.00",
     type: "veg",
     category: "burger",
   },
@@ -60,7 +60,7 @@ const menuData = [
     rating: "★★★★☆",
     title: "Peri Peri Chicken Burger",
     desc: "Spicy peri peri grilled chicken with lettuce and mayo",
-    price: "₹199.00",
+    price: "199.00",
     type: "non-veg",
     category: "burger",
   },
@@ -69,7 +69,7 @@ const menuData = [
     rating: "★★★★★",
     title: "Mushroom Masala Burger",
     desc: "Indian spiced mushroom patty with garlic aioli",
-    price: "₹169.00",
+    price: "169.00",
     type: "veg",
     category: "burger",
   },
@@ -78,7 +78,7 @@ const menuData = [
     rating: "★★★★☆",
     title: "BBQ Chicken Keema Burger",
     desc: "Minced chicken patty glazed with BBQ sauce",
-    price: "₹209.00",
+    price: "209.00",
     type: "non-veg",
     category: "burger",
   },
@@ -87,7 +87,7 @@ const menuData = [
     rating: "★★★★☆",
     title: "Veg Maharaja Burger",
     desc: "Double veg patty with cheese, lettuce and special sauce",
-    price: "₹179.00",
+    price: "179.00",
     type: "veg",
     category: "burger",
   },
@@ -114,11 +114,24 @@ export default function Home_menu() {
   }, [cart]);
 
   const handleAddToCart = (item, index) => {
-    setCart((prev) => [...prev, item]);
-    setAddedIndex(index);
+  setCart((prev) => {
+    const existing = prev.find((i) => i.title === item.title);
 
-    setTimeout(() => setAddedIndex(null), 1000);
-  };
+    if (existing) {
+      return prev.map((i) =>
+        i.title === item.title
+          ? { ...i, qty: i.qty + 1 }
+          : i
+      );
+    }
+
+    return [...prev, { ...item, qty: 1 }];
+  });
+
+  setAddedIndex(index);
+  setTimeout(() => setAddedIndex(null), 1000);
+};
+
 
   return (
     <section className="food-menu">
@@ -184,7 +197,7 @@ export default function Home_menu() {
 
                 <h3 className="food-card__title">{item.title}</h3>
                 <p className="food-card__desc">{item.desc}</p>
-                <span className="food-card__price">{item.price}</span>
+                <span className="food-card__price">₹{item.price}</span>
               </div>
             </article>
           ))}

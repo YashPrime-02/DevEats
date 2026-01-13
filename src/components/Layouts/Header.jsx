@@ -84,10 +84,14 @@ export default function Header() {
               {darkMode ? "☀️" : "🌙"}
             </button>
 
-            <button className="cart-button" aria-label="Cart">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-            </button>
+            <Link to="/Cart" aria-label="Go to cart">
+              <button className="cart-button" aria-label="Cart">
+                <i className="fa-solid fa-cart-shopping"></i>
+                {cartCount > 0 && (
+                  <span className="cart-badge">{cartCount}</span>
+                )}
+              </button>
+            </Link>
 
             <button
               className={`navbar__toggle ${open ? "active" : ""}`}
@@ -102,7 +106,7 @@ export default function Header() {
 
           <nav className={`navbar__menu ${open ? "open" : ""}`}>
             <a href="/">Home</a>
-            <a href="/menu">Menu</a>
+            <Link to="/menu">Explore Full Menu</Link>
             <a href="/offers">Offers</a>
             <a href="/contact">Contact</a>
             <a href="/order" className="order-now">
