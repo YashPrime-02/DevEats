@@ -1,0 +1,157 @@
+/* ===============================
+   BRAND SECTION
+================================ */
+.brand {
+  padding: 48px 24px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+body.dark .brand {
+  background: #121212;
+}
+
+.brand__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   TITLE
+================================ */
+.brand__title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 36px;
+  margin-bottom: 48px;
+  color: #000000;
+}
+
+body.dark .brand__title {
+  color: #ffffff;
+}
+
+/* ===============================
+   CAROUSEL
+================================ */
+.brand__carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fade edges (optional but premium) */
+.brand__carousel::before,
+.brand__carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+}
+
+.brand__carousel::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff, transparent);
+}
+
+.brand__carousel::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+body.dark .brand__carousel::before {
+  background: linear-gradient(to right, #121212, transparent);
+}
+
+body.dark .brand__carousel::after {
+  background: linear-gradient(to left, #121212, transparent);
+}
+
+/* ===============================
+   TRACK (INFINITE LOOP)
+================================ */
+.brand__track {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  width: max-content;
+
+  animation: brandScroll 28s linear infinite;
+}
+
+.brand__carousel:hover .brand__track {
+  animation-play-state: paused;
+}
+
+/* ===============================
+   ITEM
+================================ */
+.brand__item img {
+  height: 100px;
+  width: auto;
+  opacity: 0.65;
+  filter: grayscale(100%);
+  transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+}
+
+.brand__item img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* Dark mode logos slightly brighter */
+body.dark .brand__item img {
+  opacity: 0.75;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+@keyframes brandScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .brand__track {
+    gap: 24px;
+    animation-duration: 36s;
+  }
+
+  .brand__item img {
+    height: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .brand__title {
+    font-size: 28px;
+  }
+
+  .brand__item img {
+    height: 80px;
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+.brand__item img:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand__track {
+    animation: none;
+  }
+}

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Oswald:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap");
 
+
 /* ===============================
    RESET
 ================================ */
@@ -254,14 +255,6 @@ body.dark button:focus-visible {
 }
 
 
-/* ---------------------------------------------------------
-   3. Ensure minimum touch target size (WCAG 2.5.5)
----------------------------------------------------------- */
-a,
-button {
-  min-height: 36px;
-  min-width: 44px;
-}
 
 
 /* ---------------------------------------------------------

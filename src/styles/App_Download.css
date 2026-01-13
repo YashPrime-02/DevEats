@@ -1,0 +1,129 @@
+/* ===============================
+   APP DOWNLOAD SECTION
+================================ */
+.app-download {
+  padding: 48px 24px;
+  background: #ffffff;
+}
+
+body.dark .app-download {
+  background: #121212;
+}
+
+.app-download__container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.app-download__content h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+body.dark .app-download__content h2 {
+  color: #ffffff;
+}
+
+.app-download__content p {
+  max-width: 420px;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+body.dark .app-download__content p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===============================
+   STORE BUTTONS
+================================ */
+.app-download__buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.app-download__buttons img {
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.app-download__buttons img:hover {
+  transform: translateY(-2px);
+}
+
+/* ===============================
+   IMAGE
+================================ */
+.app-download__image {
+  text-align: right;
+}
+
+.app-download__image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+  .app-download__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .app-download__content p {
+    margin: 0 auto 32px;
+  }
+
+  .app-download__buttons {
+    justify-content: center;
+  }
+
+  .app-download__image {
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .app-download {
+    padding: 64px 16px;
+  }
+
+  .app-download__content h2 {
+    font-size: 32px;
+  }
+
+  .app-download__buttons img {
+    height: 44px;
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+.app-download img:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-download * {
+    transition: none !important;
+  }
+}

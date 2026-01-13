@@ -80,9 +80,9 @@ export default function Footer() {
           {/* Left links */}
           <div className="footer__legal">
             <a href="/privacy">Privacy Policy</a>
-            <span>•</span>
+            <span></span>
             <a href="/terms">Terms & Conditions</a>
-            <span>•</span>
+            <span></span>
             <a href="/faq">FAQ</a>
           </div>
 

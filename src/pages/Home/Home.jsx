@@ -1,4 +1,6 @@
 import Layout from "../../components/Layouts/Layouts";
+import Brand from "../Brands/Brand";
+import App_Download from "./App_Download";
 import Hero from "./Hero";
 import Home_about from "./Home_About";
 import Home_menu from "./Home_menu";
@@ -18,6 +20,11 @@ export default function Home() {
       {<Home_Promo />}
       {/* Home's Parallax Section  */}
       {<Parallax/>}
+      {/* App Download  Section  */}
+      {<App_Download/>}
+      {/* Brand  Section  */}
+      {<Brand/>}
+      
     </Layout>
   );
 }
