@@ -1,7 +1,7 @@
 import "../../styles/App_Download.css";
-import phoneMockup from '../../assets/shop/e-shop.png';
-import appStore from '../../assets/shop/appstore.png';
-import playstore from '../../assets/shop/googleplay.png';
+import phoneMockup from "../../assets/shop/e-shop.png";
+import appStore from "../../assets/shop/appstore.png";
+import playstore from "../../assets/shop/googleplay.png";
 export default function App_Download() {
   return (
     <>
@@ -19,8 +19,8 @@ export default function App_Download() {
             </p>
 
             <div className="app-download__buttons">
-     <img src={appStore} alt="Download on App Store" />
-              <img src={playstore} alt="Get it on Google Play" /> 
+              <img src={appStore} alt="Download on App Store" />
+              <img src={playstore} alt="Get it on Google Play" />
             </div>
           </div>
 

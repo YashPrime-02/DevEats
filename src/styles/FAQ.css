@@ -1,0 +1,147 @@
+/* ===============================
+   LEGAL PAGES BASE
+================================ */
+.legal {
+  padding: 88px 24px 120px;
+  background: #ffffff;
+}
+
+body.dark .legal {
+  background: #121212;
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+.legal__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.legal__header {
+  margin-bottom: 40px;
+}
+
+.legal__header h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.legal__header p {
+  margin-top: 8px;
+  font-size: 15px;
+  opacity: 0.75;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.legal__content section {
+  margin-bottom: 36px;
+}
+
+.legal__content h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.legal__content p {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.legal__content ul {
+  margin-top: 8px;
+  padding-left: 18px;
+}
+
+.legal__content li {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+/* ===============================
+   FAQ ACCORDION
+================================ */
+.faq-item {
+  border-bottom: 1px solid #eaeaea;
+}
+
+body.dark .faq-item {
+  border-color: #333;
+}
+
+/* Question button */
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 18px 0;
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: inherit;
+}
+
+.faq-question:hover {
+  opacity: 0.85;
+}
+
+/* Arrow */
+.faq-icon {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+}
+
+/* Rotate when open */
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* Answer container */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+
+/* Open state */
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  opacity: 1;
+}
+
+/* Answer text */
+.faq-answer p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  padding-bottom: 16px;
+  opacity: 0.85;
+}
+
+/* Accessibility */
+.faq-question:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 576px) {
+  .legal__header h1 {
+    font-size: 32px;
+  }
+}

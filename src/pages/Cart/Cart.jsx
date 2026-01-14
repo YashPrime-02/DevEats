@@ -82,7 +82,7 @@ export default function Cart() {
                       >
                         −
                       </button>
-                      <span>{item.qty}</span>
+                      <span className="quantity">{item.qty}</span>
                       <button
                         onClick={() => increaseQty(index)}
                         aria-label="Increase quantity"

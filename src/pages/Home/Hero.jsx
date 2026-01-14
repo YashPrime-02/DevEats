@@ -2,6 +2,7 @@ import React from "react";
 import Burger from "../../assets/hero/hero-2.png";
 import "../../styles/Hero.css";
 import Hero from "../../assets/hero/hero-1.jpg";
+import { Link } from "react-router-dom";
 
 export default function Section1() {
   return (
@@ -40,9 +41,9 @@ export default function Section1() {
               crispy onion rings for the perfect bite.
             </p>
 
-            <a href="/order" className="order-now">
+            <Link to ="/contact" className="order-now">
               Contact Us For Bookings
-            </a>
+            </Link >
           </div>
         </div>
       </div>

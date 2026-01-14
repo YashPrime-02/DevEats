@@ -1,0 +1,414 @@
+/* ===============================
+   ABOUT BASE
+================================ */
+.about {
+  padding: 96px 24px;
+  background: #ffffff;
+}
+
+body.dark .about {
+  background: #121212;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.about__header {
+  max-width: 700px;
+  margin: 0 auto 72px;
+  text-align: center;
+}
+
+.about__header h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 42px;
+}
+
+.about__header p {
+  margin-top: 12px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+
+/* ===============================
+   MULTI-LANGUAGE BRAND ANIMATION
+================================ */
+.about__title {
+  font-family: "Oswald", sans-serif;
+  font-size: 42px;
+}
+
+/* ===============================
+   MULTI-LANGUAGE BRAND (FIXED)
+================================ */
+.about__brand {
+  position: relative;
+  display: inline-block;
+  min-width: 140px; /* ✅ FIX: prevents text clipping */
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.about__brand {
+  height: 1.3em;
+  line-height: 1.3em;
+}
+
+
+.about__brand span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: brandCycle 12s infinite;
+  animation-fill-mode: both; /* ✅ VERY IMPORTANT */
+}
+
+.about__brand span:first-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.about__brand {
+  isolation: isolate; /* prevents blending issues */
+}
+
+.about__brand span {
+  animation: brandCycle 30s infinite, gradientFlow 6s ease infinite;
+}
+
+
+/* Staggered animation delays */
+.about__brand span:nth-child(1)  { animation-delay: 0s; }
+.about__brand span:nth-child(2)  { animation-delay: 2s; }
+.about__brand span:nth-child(3)  { animation-delay: 4s; }
+.about__brand span:nth-child(4)  { animation-delay: 6s; }
+.about__brand span:nth-child(5)  { animation-delay: 8s; }
+.about__brand span:nth-child(6)  { animation-delay: 10s; }
+.about__brand span:nth-child(7)  { animation-delay: 12s; }
+.about__brand span:nth-child(8)  { animation-delay: 14s; }
+.about__brand span:nth-child(9)  { animation-delay: 16s; }
+.about__brand span:nth-child(10) { animation-delay: 18s; }
+.about__brand span:nth-child(11) { animation-delay: 20s; }
+.about__brand span:nth-child(12) { animation-delay: 22s; }
+.about__brand span:nth-child(13) { animation-delay: 24s; }
+.about__brand span:nth-child(14) { animation-delay: 26s; }
+.about__brand span:nth-child(15) { animation-delay: 28s; }
+
+
+
+@keyframes brandCycle {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  35% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ===============================
+   TIMELINE WRAPPER
+================================ */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Central line */
+.timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #e5e5e5;
+  transform: translateX(-50%);
+}
+
+body.dark .timeline__line {
+  background: #333;
+}
+
+/* Moving ball */
+.timeline__ball {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  background: #f7be27;
+  border-radius: 50%;
+  transform: translate(-50%, 0);
+  transition: transform 0.1s linear;
+  z-index: 2;
+}
+
+/* ===============================
+   TIMELINE ITEMS
+================================ */
+.timeline__item {
+  width: 45%;
+  padding: 20px 24px;
+  background: #f8f8f8;
+  border-radius: 14px;
+  margin-bottom: 64px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+body.dark .timeline__item {
+  background: #1f1f1f;
+}
+
+.timeline__item h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.timeline__item p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* Left / Right alternation */
+.timeline__item:nth-child(odd) {
+  margin-left: auto;
+}
+
+.timeline__item:nth-child(even) {
+  margin-right: auto;
+}
+
+/* ===============================
+   SUBHEADINGS
+================================ */
+.about__subtitle {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #f7be27;
+}
+
+.about__description {
+  margin-top: 14px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15.5px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+/* ===============================
+   BALL MOVEMENT FIX
+================================ */
+.timeline__ball {
+  transition: transform 0.08s linear;
+}
+
+
+/* ===============================
+   ACTIVE TIMELINE CARD
+================================ */
+.timeline__item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  opacity: 0.55;
+}
+
+.timeline__item.active {
+  opacity: 1;
+  transform: scale(1.03);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #f7be27;
+}
+
+/* ===============================
+   BALL PRECISION
+================================ */
+.timeline__ball {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: #f7be27;
+  border-radius: 50%;
+  z-index: 3;
+  transition: top 0.12s linear;
+}
+
+/* ===============================
+   GRADIENT ANIMATED TEXT
+================================ */
+.about__brand span {
+  background: linear-gradient(
+    120deg,
+    #f7be27,
+    #ff7a18,
+    #ff4ecd,
+    #7a5cff,
+    #f7be27
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brandCycle 12s infinite, gradientFlow 6s ease infinite;
+}
+
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* ===============================
+   RESPONSIVE — TABLET
+================================ */
+@media (max-width: 1024px) {
+  .about {
+    padding: 88px 20px;
+  }
+
+  .timeline {
+    padding: 32px 0;
+  }
+
+  .timeline__item {
+    width: 48%;
+  }
+}
+
+/* ===============================
+   RESPONSIVE — MOBILE
+================================ */
+@media (max-width: 768px) {
+  .about {
+    padding: 72px 16px;
+  }
+
+  .about__header {
+    margin-bottom: 56px;
+  }
+
+  .about__header h2 {
+    font-size: 34px;
+  }
+
+  .about__subtitle {
+    font-size: 16px;
+  }
+
+  .about__description {
+    font-size: 15px;
+  }
+
+  /* Timeline shifts to single column */
+  .timeline__line,
+  .timeline__ball {
+    left: 14px;
+    transform: none;
+  }
+
+  .timeline__item {
+    width: 90%;
+    margin-left: 40px !important;
+    margin-right: 0 !important;
+    margin-bottom: 48px;
+  }
+
+  .timeline__item.active {
+    transform: none; /* avoid scale jump on mobile */
+  }
+}
+
+/* ===============================
+   RESPONSIVE — SMALL DEVICES
+================================ */
+@media (max-width: 480px) {
+  .about__header h2 {
+    font-size: 30px;
+  }
+
+  .timeline__item {
+    padding: 18px 20px;
+  }
+
+  .timeline__item h3 {
+    font-size: 16px;
+  }
+
+  .timeline__item p {
+    font-size: 14px;
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY — FOCUS STATES
+================================ */
+.timeline__item:focus-within {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+/* ===============================
+   ACCESSIBILITY — COLOR CONTRAST
+================================ */
+body.dark .timeline__item.active {
+  border-left-color: #f7be27;
+}
+
+/* ===============================
+   REDUCED MOTION SUPPORT
+================================ */
+@media (prefers-reduced-motion: reduce) {
+  .timeline__ball,
+  .timeline__item {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* ===============================
+   REDUCED MOTION SUPPORT
+================================ */
+@media (prefers-reduced-motion: reduce) {
+  .about__brand span {
+    animation: none;
+    opacity: 0;
+    position: static;
+    transform: none;
+    background: none;
+    color: currentColor;
+  }
+
+  .about__brand span:first-child {
+    opacity: 1;
+  }
+}

@@ -14,8 +14,6 @@ export default function Home() {
       {<Hero />}
       {/* Home's About Section  */}
       {<Home_about />}
-      {/* Home's Menu Section  */}
-      {<Home_menu />}
       {/* Home's Promo Section  */}
       {<Home_Promo />}
       {/* Home's Parallax Section  */}

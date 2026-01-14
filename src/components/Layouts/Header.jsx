@@ -105,8 +105,8 @@ export default function Header() {
           </div>
 
           <nav className={`navbar__menu ${open ? "open" : ""}`}>
-            <a href="/">Home</a>
-            <Link to="/menu">Explore Full Menu</Link>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/menu" className="order-now">
               Order Now

@@ -47,18 +47,14 @@ export default function Contact() {
         <header className="contact__header">
           <h2>Contact Us</h2>
           <p>
-            Have a question, feedback, or partnership inquiry?
-            We’d love to hear from you.
+            Have a question, feedback, or partnership inquiry? We’d love to hear
+            from you.
           </p>
         </header>
 
         <div className="contact__grid">
           {/* FORM */}
-          <form
-            className="contact__form"
-            onSubmit={handleSubmit}
-            noValidate
-          >
+          <form className="contact__form" onSubmit={handleSubmit} noValidate>
             <div className="form-group">
               <label htmlFor="name">Your Name</label>
               <input
@@ -127,13 +123,16 @@ export default function Contact() {
           </form>
 
           {/* INFO */}
-          <aside className="contact__info">
+          <div className="contact__info">
             <h3>Reach Us</h3>
-            <p><strong>YOMATO Food Delivery</strong></p>
+
+            <p>
+              <strong>YOMATO Food Delivery</strong>
+            </p>
             <p>Email: support@yomato.com</p>
             <p>Phone: +91 98765 43210</p>
             <p>Lucknow, India</p>
-          </aside>
+          </div>
         </div>
       </div>
     </section>

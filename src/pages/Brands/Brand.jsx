@@ -7,15 +7,7 @@ import Brand5 from "../../assets/brands/brand-15.png";
 import Brand6 from "../../assets/brands/brand-16.png";
 import Brand7 from "../../assets/brands/brand-17.png";
 
-const brands = [
-  Brand1,
-  Brand2,
-  Brand3,
-  Brand4,
-  Brand5,
-  Brand6,
-  Brand7,
-];
+const brands = [Brand1, Brand2, Brand3, Brand4, Brand5, Brand6, Brand7];
 
 export default function Brand() {
   return (

@@ -109,11 +109,11 @@ export default function Footer() {
           <div className="footer__bottom-container">
             {/* Left links */}
             <div className="footer__legal">
-              <a href="/privacy">Privacy Policy</a>
+              <Link to="/privacy">Privacy Policy</Link >
               <span></span>
-              <a href="/terms">Terms & Conditions</a>
+              <Link to="/terms">Terms & Conditions</Link >
               <span></span>
-              <a href="/faq">FAQ</a>
+              <Link to="/faq">FAQ</Link >
             </div>
 
             {/* Right copyright */}
