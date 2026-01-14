@@ -1,16 +1,156 @@
-# React + Vite
+# 🍔 YOMATO — Food Delivery Platform (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+YOMATO is a modern, responsive food delivery web application built using **React + Vite**.  
+The project focuses on performance, clean UI/UX, accessibility, and scalable architecture, simulating a real-world food delivery platform.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Features
 
-## React Compiler
+- 🧾 Dynamic food menu powered by a public REST API
+- 🛒 Cart system with localStorage persistence
+- 🔍 Veg / Non-Veg filtering
+- ⚡ Fast performance with Vite
+- 🎨 Modern UI with animations and gradients
+- ♿ Accessibility-first components (ARIA, keyboard support)
+- 📱 Fully responsive (mobile, tablet, desktop)
+- 🧭 Central layout system (Header + Footer)
+- 📜 Legal pages (Privacy, Terms, FAQ)
+- 📊 Animated About page with scroll-based timeline
+- 🌐 Multi-language brand animation (Indian + foreign scripts)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧱 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React 18
+- **Bundler:** Vite
+- **Styling:** Plain CSS (no Tailwind)
+- **Routing:** React Router DOM
+- **State Management:** React Hooks
+- **API:** Public Food Menu API
+- **Storage:** localStorage
+- **Linting:** ESLint
+- **Accessibility:** ARIA roles & reduced-motion support
+
+---
+
+## 📁 Project Structure
+
+src/
+├── assets/
+├── components/
+│ ├── Header/
+│ ├── Footer/
+│ └── Layouts/
+├── pages/
+│ ├── Home/
+│ ├── Menu/
+│ ├── Cart/
+│ ├── About/
+│ ├── Contact/
+│ ├── Privacy/
+│ ├── Terms/
+│ └── FAQ/
+├── Services/
+│ └── menuService.js
+├── styles/
+├── App.jsx
+└── main.jsx
+
+
+---
+
+## 🔗 API Used
+
+Food menu data is fetched from:
+
+
+
+https://free-food-menus-api-two.vercel.app/burgers
+
+
+API responses are transformed on the frontend to match UI requirements.
+
+---
+
+## 🌱 Environment Setup (Vite)
+
+Create a `.env` file in the project root:
+
+
+
+VITE_BASE_URL=https://free-food-menus-api-two.vercel.app
+
+
+> Only variables prefixed with `VITE_` are exposed to the client.
+
+---
+
+## 🛠️ Installation & Run
+
+
+
+git clone <your-repo-url>
+cd yomato
+npm install
+npm run dev
+
+
+The application will run at:
+
+
+
+http://localhost:5173
+
+
+---
+
+## 🧪 Linting
+
+
+
+npm run lint
+
+
+---
+
+## ♿ Accessibility
+
+- Semantic HTML structure  
+- Keyboard navigable UI  
+- `aria-label`, `aria-live`, `aria-current` usage  
+- Focus-visible outlines  
+- Reduced motion support via `prefers-reduced-motion`
+
+---
+
+## 🎯 Design Philosophy
+
+- Real-world scalable structure  
+- Clear separation of concerns  
+- Reusable layouts and components  
+- Performance-first rendering  
+- Readable, maintainable code  
+
+---
+
+## 📌 Future Improvements
+
+- User authentication  
+- Order history  
+- Payment gateway integration  
+- Admin dashboard  
+- Backend with Node.js & Express  
+- Database integration  
+
+---
+
+## 📄 License
+
+This project is created for learning and demonstration purposes only.  
+All brand names and APIs belong to their respective owners.
+
+---
+
+**Built with focus, discipline, and real-world engineering practices.**
