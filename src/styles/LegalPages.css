@@ -95,3 +95,18 @@ body.dark .faq-item {
     font-size: 32px;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .page-loader {
+    background: #121212;
+  }
+
+  .page-loader__text {
+    color: #ddd;
+  }
+
+  .page-loader__spinner {
+    border-color: rgba(255, 255, 255, 0.2);
+    border-top-color: #f7be27;
+  }
+}
