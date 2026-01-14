@@ -119,9 +119,10 @@ export default function Cart() {
                 <strong>₹{grandTotal}</strong>
               </div>
 
-              <button className="order-now cart__checkout">
+              <Link to="/thank-you" button className="order-now cart__checkout">
                 Proceed to Checkout
-              </button>
+              </Link>
+              
 
               <Link to="/" className="order-now cart__checkout">
                 Go Back

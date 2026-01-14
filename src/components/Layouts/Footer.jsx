@@ -77,10 +77,10 @@ export default function Footer() {
           {/* Links */}
           <div className="footer__links">
             <h4>Explore</h4>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
             <Link to="/menu">Explore Full Menu</Link>
-            <a href="/offers">Offers</a>
-            <a href="/contact">Contact</a>
+            <Link to="/About">About</Link>
+            <Link to="/contact">Contact</Link>
           </div>
 
           {/* Map */}

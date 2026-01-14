@@ -1,0 +1,149 @@
+/* ===============================
+   STATUS PAGES BASE
+================================ */
+.status-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: #ffffff;
+}
+
+body.dark .status-page {
+  background: #121212;
+}
+
+/* ===============================
+   CARD
+================================ */
+.status-page__card {
+  max-width: 520px;
+  width: 100%;
+  padding: 48px 36px;
+  border-radius: 22px;
+  text-align: center;
+  background: #f9f9f9;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+}
+
+body.dark .status-page__card {
+  background: #1f1f1f;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+}
+
+/* ===============================
+   ICON / NUMBER
+================================ */
+.status-page__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 700;
+  background: rgba(247, 190, 39, 0.15);
+  color: #f7be27;
+}
+
+.status-page__icon.error {
+  background: rgba(227, 0, 14, 0.12);
+  color: #e3000e;
+}
+
+/* ===============================
+   TEXT
+================================ */
+.status-page__title {
+  font-family: "Oswald", sans-serif;
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.status-page__subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.status-page__text {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+/* ===============================
+   ACTIONS
+================================ */
+.status-page__actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.status-page__btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-page__btn.primary {
+  background: #f7be27;
+  color: #000;
+}
+
+.status-page__btn.secondary {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: inherit;
+}
+
+body.dark .status-page__btn.secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.status-page__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 480px) {
+  .status-page__card {
+    padding: 40px 22px;
+  }
+
+  .status-page__title {
+    font-size: 28px;
+  }
+
+  .status-page{
+     min-height: 60vh;
+
+  }
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+.status-page__btn:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-page__btn {
+    transition: none;
+  }
+}

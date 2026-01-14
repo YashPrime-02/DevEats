@@ -345,7 +345,7 @@ body.dark .cart-button:focus-visible {
    MOBILE MENU – LIGHT GLASS
 ================================ */
     .navbar__menu {
-        background: rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
 
@@ -365,7 +365,7 @@ body.dark .cart-button:focus-visible {
     }
 
     body.dark .navbar__menu {
-        background: rgba(26, 26, 26, 0.6);
+        background: rgba(26, 26, 26, 0.95);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         /* Safari support */

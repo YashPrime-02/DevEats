@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
-// ✅ Home stays eager (fast first paint)
+// ✅ Home stays loaded from start
 import Home from "./pages/Home/Home";
 
-// ⏳ Lazy-loaded pages
+// ⏳ Lazy pages
 const About = lazy(() => import("./pages/About/AboutWrapper"));
 const Menu = lazy(() => import("./pages/Menu/Menu"));
 const CartPage = lazy(() => import("./pages/Cart/Cart_Page"));
@@ -13,19 +13,21 @@ const ContactWrapper = lazy(() => import("./pages/Contact/ContactWrapper"));
 const PrivacyWrapper = lazy(() => import("./pages/privacy/privacyWrapper"));
 const Terms = lazy(() => import("./pages/terms/termsWrapper"));
 const FAQ = lazy(() => import("./pages/FAQ/FAQWrapper"));
+const ThankYou =lazy(()=> import("./pages/ThankYou/ThankYouWrapper"));
+const NotFound =lazy(()=> import("./pages/NotFound/NotFoundWrapper"));
 
-// ✅ Loader
+
 import PageLoader from "./components/PageLoader";
+import ScrollToTop from "./components/ScrollToTop"; 
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop /> {/* ✅ GLOBAL FIX */}
+
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          {/* ✅ Home loads immediately */}
           <Route path="/" element={<Home />} />
-
-          {/* ⏳ Lazy routes */}
           <Route path="/about" element={<About />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/cart" element={<CartPage />} />
@@ -34,6 +36,11 @@ export default function App() {
           <Route path="/privacy" element={<PrivacyWrapper />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/thank-you" element={<ThankYou/>} />
+          
+             {/* ❌*/}
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Suspense>
     </BrowserRouter>
