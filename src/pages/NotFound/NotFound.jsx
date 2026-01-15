@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "../../styles/StatusPages.css";
 
 export default function NotFound() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/", { replace: true }); // ✅ Redirect to home after 10s
+    }, 10000);
+
+    return () => clearTimeout(timer); 
+  }, [navigate]);
+
   return (
     <section
       className="status-page"
       role="alert"
       aria-labelledby="notfound-heading"
+      aria-describedby="notfound-description"
     >
       <div className="status-page__card">
         <span className="status-page__icon error" aria-hidden="true">
@@ -14,28 +26,31 @@ export default function NotFound() {
         </span>
 
         <h1 id="notfound-heading" className="status-page__title">
-          We couldn’t find this page
+          Page Not Found
         </h1>
 
-        <p className="status-page__subtitle">
-          The link you followed may be outdated or incorrect.
+        <p
+          id="notfound-description"
+          className="status-page__subtitle"
+        >
+          The page you’re trying to reach doesn’t exist.
         </p>
 
         <p className="status-page__text">
-          We’re sorry for the inconvenience. The page you’re trying to reach
-          may have been moved, renamed, or is no longer available.  
-          Please use one of the options below to continue browsing YOMATO.
+          It may have been moved, renamed, or the link could be incorrect.
+          You’ll be redirected to the home page automatically in{" "}
+          <strong>10 seconds</strong>.
         </p>
 
-        <div className="status-page__actions">
+        {/* <div className="status-page__actions">
           <Link to="/" className="status-page__btn primary">
-            Return to Home
+            Go to Home Now
           </Link>
 
           <Link to="/menu" className="status-page__btn secondary">
-            View Our Menu
+            Explore Menu
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

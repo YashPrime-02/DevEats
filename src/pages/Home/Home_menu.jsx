@@ -106,6 +106,12 @@ export default function Home_menu() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [foodFilter, setFoodFilter] = useState("all");
+  const ITEMS_PER_PAGE = 9;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [foodFilter]);
 
   useEffect(() => {
     async function loadMenu() {
@@ -140,6 +146,17 @@ export default function Home_menu() {
       ? menu
       : menu.filter((item) => item.type === foodFilter);
 
+  const totalPages = Math.ceil(filteredMenu.length / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const paginatedMenu = filteredMenu.slice(startIndex, endIndex);
+
+  const showingFrom = filteredMenu.length === 0 ? 0 : startIndex + 1;
+  const showingTo = Math.min(endIndex, filteredMenu.length);
+  const totalItems = filteredMenu.length;
+
   // ✅ INITIALIZE FROM LOCALSTORAGE (KEY FIX)
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cart")) || [];
@@ -152,6 +169,17 @@ export default function Home_menu() {
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new Event("cartUpdated"));
   }, [cart]);
+
+  // useEffect(() => {
+  //   const menuSection = document.querySelector(".food-menu");
+
+  //   if (menuSection) {
+  //     menuSection.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // }, [currentPage]);
 
   const handleAddToCart = (item) => {
     setCart((prev) => {
@@ -213,9 +241,17 @@ export default function Home_menu() {
 
         {loading && <p>Loading menu...</p>}
         {error && <p>{error}</p>}
+
+        <div className="menu-meta" aria-live="polite" aria-atomic="true">
+          <span className="counter">
+            Showing <b>{showingFrom}</b>–<b>{showingTo}</b> of{" "}
+            <b>{totalItems}</b> items
+          </span>
+        </div>
+
         {!loading && !error && (
           <div className="food-grid">
-            {filteredMenu.map((item) => (
+            {paginatedMenu.map((item) => (
               <article className="food-card" key={item.id}>
                 <div className="food-card__image">
                   <img
@@ -250,6 +286,34 @@ export default function Home_menu() {
                 </div>
               </article>
             ))}
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => p - 1)}
+            >
+              Prev
+            </button>
+
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                className={currentPage === i + 1 ? "active" : ""}
+                onClick={() => setCurrentPage(i + 1)}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => p + 1)}
+            >
+              Next
+            </button>
           </div>
         )}
       </div>
