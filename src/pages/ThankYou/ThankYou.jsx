@@ -9,7 +9,9 @@ export default function ThankYou() {
       aria-labelledby="thankyou-heading"
     >
       <div className="status-page__card">
-        <span className="status-page__icon" aria-hidden="true">✓</span>
+        <span className="status-page__icon" aria-hidden="true">
+          ✓
+        </span>
 
         <h1 id="thankyou-heading" className="status-page__title">
           Thank You for Your Purchase
