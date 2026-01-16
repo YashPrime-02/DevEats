@@ -65,13 +65,13 @@ export default function Cart() {
                   <div className="cart__details">
                     <h3>{item.title}</h3>
 
-                    <span
+                    {/* <span
                       className={`cart__tag ${
                         item.type === "veg" ? "veg" : "non-veg"
                       }`}
                     >
                       {item.type.toUpperCase()}
-                    </span>
+                    </span> */}
 
                     <p>₹{item.price}</p>
 
