@@ -36,166 +36,176 @@ The project focuses on performance, clean UI/UX, accessibility, and scalable arc
 ---
 
 ## 📁 Project Structure
+# Project File Structure
 
-1) Root LEVEL
+This document describes the complete folder and file structure of the **Food Delivery App**, including both **Backend (Node.js + Sequelize)** and **Frontend (React + Vite)**.
 
+---
+
+## Root Directory
+
+```
 FOOD-DELIVERY-APP/
 │
-├── .vite/                    # Vite internal cache (auto-generated)
-├── dist/                     # Production build output (after `npm run build`)
-├── node_modules/             # Installed dependencies
+├── Backend/
+├── node_modules/
+├── public/
+├── src/
 │
-├── public/                   # Static assets (favicon, images if any)
-│
-├── src/                      # Application source code (MAIN WORK AREA)
-│
-├── .env                      # Environment variables (API keys, base URLs)
+├── .env
 ├── .gitattributes
 ├── .gitignore
-├── eslint.config.js           # ESLint configuration
-├── index.html                # Root HTML template (Vite entry)
+├── eslint.config.js
+├── index.html
+├── LICENSE
 ├── package.json
 ├── package-lock.json
 ├── README.md
-├── LICENSE
-├── vercel.json                # Deployment config (Vercel)
-└── vite.config.js             # Vite configuration
-
-
-2) src/ – Core Application Structure
-
-src/
-│
-├── assets/                   # Images, icons, fonts (used in components/pages)
-│
-├── components/               # Reusable global UI components
-│   ├── Layouts/
-│   │   └── Layouts.jsx       # App shell (Header + Footer + Outlet)
-│   │
-│   ├── Header/
-│   ├── Footer/
-│   ├── PageLoader.jsx        # Suspense fallback loader
-│   ├── ScrollToTop.jsx       # Scroll reset on route change
-│   
-│
-├── pages/                    # Route-level pages (1 folder = 1 route)
-│
-├── Services/                 # API / data abstraction layer
-│   └── menuService.js
-│
-├── styles/                   # Global + page-specific CSS
-│
-├── App.jsx                   # Router + lazy loading setup
-└── main.jsx                  # ReactDOM entry point
-
-3) pages structure
-
-pages/
-└── PageName/
-    ├── PageName.jsx          # Actual page UI
-    └── PageNameWrapper.jsx   # Wrapper (Layout, SEO, guards if needed)
-
-3.1) HOME PAGE
-
-pages/Home/
-│
-├── Home.jsx                  # Assembles home sections
-├── Hero.jsx
-├── Home_About.jsx
-├── Home_menu.jsx
-├── Home_Promo.jsx
-├── Parallax.jsx
-└── App_Download.jsx
-
-<Layout>
-  <Hero />
-  <Home_about />
-  <Home_Promo />
-  <Parallax />
-  <App_Download />
-  <Brand />
-</Layout>
-
-
-3.2) Menu Page
-pages/Menu/
-└── Menu.jsx
-
-<Layout>
-  <Home_menu />
-  <Brand />
-</Layout>
-
-3.3) Cart Page
-
-pages/Cart/
-├── Cart.jsx                  # Cart UI logic
-└── Cart_Page.jsx             # Route-level container
-
-3.4) About Page
-pages/About/
-├── About.jsx
-└── AboutWrapper.jsx
-
-3.5) Brands
-pages/Brands/
-└── Brand.jsx
-
-3.6) Contact
-
-pages/Contact/
-├── Contact.jsx
-└── ContactWrapper.jsx
-
-3.7) FAQ Page
-
-pages/FAQ/
-├── FAQ.jsx
-└── FAQWrapper.jsx
-
-3.8) Legal Pages
-
-pages/privacy/
-├── privacy.jsx
-└── privacyWrapper.jsx
-
-pages/terms/
-├── terms.jsx
-└── termsWrapper.jsx
-
-
-3.9) Thank you and not found page
-pages/ThankYou/
-├── ThankYou.jsx
-└── ThankYouWrapper.jsx
-
-pages/NotFound/
-├── NotFound.jsx
-└── NotFoundWrapper.jsx
-
-4) Services
-Services/
-└── menuService.js
-
-5) Routing
-main.jsx
-  ↓
-App.jsx
-  ↓
-BrowserRouter
-  ↓
-Suspense(PageLoader)
-  ↓
-Routes
-  ↓
-PageWrapper
-  ↓
-Layout
-  ↓
-Page Sections / Components
-
+├── vercel.json
+├── vite.config.js
+```
 
 ---
+
+## Backend Structure (`Backend/`)
+
+```
+Backend/
+│
+├── config/
+│
+├── controllers/
+│   ├── adminController.js
+│   ├── authController.js
+│   ├── cartController.js
+│   └── orderController.js
+│
+├── middleware/
+│   ├── adminMiddleware.js
+│   ├── authMiddleware.js
+│   ├── errorHandler.js
+│   └── logger.js
+│
+├── migrations/
+│
+├── models/
+│   ├── adminLog.js
+│   ├── cart.js
+│   ├── cartItem.js
+│   ├── contact.js
+│   ├── index.js
+│   ├── order.js
+│   ├── orderItem.js
+│   └── user.js
+│
+├── routes/
+│
+├── seeders/
+│
+├── .env
+├── package.json
+├── package-lock.json
+├── server.js
+├── Structure.md
+├── test-sequelize.js
+```
+
+---
+
+## Frontend Structure (`src/`)
+
+```
+src/
+│
+├── assets/
+│   ├── about/
+│   ├── blog/
+│   ├── brands/
+│   ├── cart/
+│   ├── footer/
+│   ├── hero/
+│   ├── logo/
+│   ├── menu/
+│   ├── parallax/
+│   ├── promotion/
+│   ├── shop/
+│   ├── Food_Content.txt
+│   └── react.svg
+│
+├── components/
+│   └── Layouts/
+│       ├── PageLoader.jsx
+│       └── ScrollToTop.jsx
+│
+├── pages/
+│   ├── About/
+│   │   ├── About.jsx
+│   │   └── AboutWrapper.jsx
+│   │
+│   ├── Brands/
+│   │   └── Brand.jsx
+│   │
+│   ├── Cart/
+│   │   ├── Cart_Page.jsx
+│   │   └── Cart.jsx
+│   │
+│   ├── Contact/
+│   │   ├── Contact.jsx
+│   │   └── ContactWrapper.jsx
+│   │
+│   ├── FAQ/
+│   │   ├── FAQ.jsx
+│   │   └── FAQWrapper.jsx
+│   │
+│   ├── Home/
+│   │   ├── App_Download.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Home_About.jsx
+│   │   ├── Home_menu.jsx
+│   │   ├── Home_Promo.jsx
+│   │   ├── Home.jsx
+│   │   └── Parallax.jsx
+│   │
+│   ├── Menu/
+│   │   └── Menu.jsx
+│   │
+│   ├── NotFound/
+│   │   ├── NotFound.jsx
+│   │   └── NotFoundWrapper.jsx
+│   │
+│   ├── privacy/
+│   │   ├── privacy.jsx
+│   │   └── privacyWrapper.jsx
+│   │
+│   ├── terms/
+│   │   ├── terms.jsx
+│   │   └── termsWrapper.jsx
+│   │
+│   └── ThankYou/
+│       ├── ThankYou.jsx
+│       └── ThankYouWrapper.jsx
+│
+├── Services/
+│   └── menuService.js
+│
+├── styles/
+│   └── App.css
+│
+├── App.jsx
+├── main.jsx
+```
+
+---
+
+## Summary
+
+- **Backend** follows a clean MVC structure with controllers, middleware, Sequelize models, migrations, and seeders.
+- **Frontend** is built with **React + Vite**, using:
+  - `pages/` for route-level views
+  - `components/Layouts/` for shared UI logic
+  - `assets/` organized by feature/section
+  - `Services/` for API/service abstraction
+- The project is **deployment-ready** with `vercel.json`.
 
 ## 🔗 API Used
 

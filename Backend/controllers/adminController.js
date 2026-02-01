@@ -1,16 +1,22 @@
 const pool = require("../config/db");
+const db = require("../models");
+
+
 
 // 👥 Get All Users
 exports.getUsers = async (req, res, next) => {
   try {
-    const result = await pool.query(
-      "SELECT id, name, email, role, created_at FROM users ORDER BY created_at DESC"
-    );
-    res.json(result.rows);
+    const users = await db.User.findAll({
+      attributes: ["id", "name", "email", "role", "created_at"],
+      order: [["created_at", "DESC"]],
+    });
+
+    res.json(users);
   } catch (err) {
     next(err);
   }
 };
+
 
 // 📦 Get All Orders
 exports.getOrders = async (req, res, next) => {
