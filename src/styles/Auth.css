@@ -1,0 +1,50 @@
+.auth-page {
+  min-height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: #111;
+  padding: 40px;
+  width: 380px;
+  border-radius: 10px;
+}
+
+.auth-toggle {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.auth-toggle button {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #f7be27;
+  color: #f7be27;
+  cursor: pointer;
+}
+
+.auth-toggle .active {
+  background: #f7be27;
+  color: black;
+}
+
+form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: black;
+  border: 1px solid #333;
+  color: white;
+}
+
+.error {
+  color: #e3000e;
+}
+
+.success {
+  color: #f7be27;
+}

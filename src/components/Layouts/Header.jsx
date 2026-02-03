@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+    const { user, logout } = useAuth(); 
 
   // Scroll effects
   useEffect(() => {
@@ -83,6 +85,29 @@ export default function Header() {
             >
               {darkMode ? "☀️" : "🌙"}
             </button>
+
+            {/* Auth buttons */}
+            {!user ? (
+              <Link to="/auth" className="btn_red">
+                Login / Sign Up
+              </Link>
+            ) : (
+              <>
+                {user.role === "admin" && (
+                  <Link to="/admin" className="btn_red">
+                    Admin
+                  </Link>
+                )}
+
+                <button
+                  className="btn_red"
+                  onClick={logout}
+                  style={{ marginLeft: "8px" }}
+                >
+                  Logout
+                </button>
+              </>
+            )}
 
             <Link to="/Cart" aria-label="Go to cart">
               <button className="cart-button" aria-label="Cart">

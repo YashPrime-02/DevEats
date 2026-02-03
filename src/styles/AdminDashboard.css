@@ -1,0 +1,207 @@
+.admin {
+  padding: 40px;
+  background: black;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+.admin h1 {
+  font-family: "Oswald", sans-serif;
+  color: #f7be27;
+  margin-bottom: 30px;
+  margin-top: 5%;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: #111;
+  border: 2px solid #f7be27;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+section {
+  margin-top: 40px;
+}
+
+section h2 {
+  color: #e3000e;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+th {
+  background: #f7be27;
+  color: black;
+}
+
+.admin-role {
+  color: #f7be27;
+  font-weight: bold;
+}
+
+
+/* ===============================
+   ADMIN – LIGHT MODE (DEFAULT)
+================================ */
+.admin {
+  padding: 40px;
+  background: #f9f9f9;
+  color: #111111;
+  min-height: 100vh;
+}
+
+.admin h1 {
+  font-family: "Oswald", sans-serif;
+  color: #e3000e;
+  margin-bottom: 30px;
+}
+
+/* Stats grid */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e3000e;
+}
+
+/* Sections */
+section {
+  margin-top: 40px;
+}
+
+section h2 {
+  color: #e3000e;
+  margin-bottom: 15px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eaeaea;
+  text-align: left;
+}
+
+th {
+  background: #f7be27;
+  color: #000000;
+  font-weight: 600;
+}
+
+.admin-role {
+  color: #e3000e;
+  font-weight: bold;
+}
+
+/* ===============================
+   ADMIN – DARK MODE
+================================ */
+body.dark .admin {
+  background: #0f0f0f;
+  color: #ffffff;
+}
+
+body.dark .admin h1 {
+  color: #f7be27;
+}
+
+/* Dark cards */
+body.dark .card {
+  background: #111111;
+  border: 1px solid rgba(247, 190, 39, 0.4);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.dark .card h3 {
+  color: #ffffff;
+}
+
+body.dark .card p {
+  color: #f7be27;
+}
+
+/* Dark section headings */
+body.dark section h2 {
+  color: #e3000e;
+}
+
+/* Dark tables */
+body.dark table {
+  background: #111111;
+}
+
+body.dark th {
+  background: #f7be27;
+  color: #000000;
+}
+
+body.dark td {
+  border-bottom: 1px solid #333333;
+}
+
+/* Role highlight */
+body.dark .admin-role {
+  color: #f7be27;
+}
