@@ -5,7 +5,7 @@ import "../../styles/auth.css";
 
 
 export default function Auth() {
-  const [mode, setMode] = useState("login");
+const [mode, setMode] = useState("login");
 console.log("API URL:", import.meta.env.VITE_API_URL);
 
   return (

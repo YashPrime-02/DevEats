@@ -1,5 +1,8 @@
 import "../../styles/Home_menu.css";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
+import { addToCart } from "../../Services/cartService";
 
 import burger_1 from "../../assets/menu/burger-11.jpg";
 // import burger_2 from "../../assets/menu/burger-12.jpg";
@@ -157,18 +160,9 @@ export default function Home_menu() {
   const showingTo = Math.min(endIndex, filteredMenu.length);
   const totalItems = filteredMenu.length;
 
-  // ✅ INITIALIZE FROM LOCALSTORAGE (KEY FIX)
-  const [cart, setCart] = useState(() => {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-  });
 
   const [addedIndex, setAddedIndex] = useState(null);
 
-  // ✅ Persist cart + notify header
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cartUpdated"));
-  }, [cart]);
 
   // useEffect(() => {
   //   const menuSection = document.querySelector(".food-menu");
@@ -181,24 +175,34 @@ export default function Home_menu() {
   //   }
   // }, [currentPage]);
 
-  const handleAddToCart = (item) => {
-    setCart((prev) => {
-      // ✅ Use id, NOT title (titles can repeat)
-      const existing = prev.find((i) => i.id === item.id);
+  const { user } = useAuth();
+const { reloadCart } = useCart();
 
-      if (existing) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
-        );
-      }
+const handleAddToCart = async (item) => {
+  if (!user) {
+    alert("Please login to add items to cart");
+    return;
+  }
 
-      return [...prev, { ...item, qty: 1 }];
+  try {
+    await addToCart({
+      external_item_id: item.id,
+      name: item.title,
+      price: item.price,
+      image_url: item.image,
+      quantity: 1,
     });
 
-    setAddedIndex(item.id); // use stable id
+    setAddedIndex(item.id);
+    await reloadCart();
 
     setTimeout(() => setAddedIndex(null), 1000);
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Failed to add item to cart");
+  }
+};
+
 
   return (
     <section className="food-menu">

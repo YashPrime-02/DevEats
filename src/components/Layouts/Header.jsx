@@ -2,13 +2,21 @@ import React, { useState, useEffect } from "react";
 import "../../styles/Header.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-    const { user, logout } = useAuth(); 
+
+  const { user, logout } = useAuth();
+  const { cart } = useCart();
+
+  const cartCount = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
 
   // Scroll effects
   useEffect(() => {
@@ -18,9 +26,7 @@ export default function Header() {
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
 
-      const progress = (scrollTop / docHeight) * 100;
-
-      setScrollProgress(progress);
+      setScrollProgress((scrollTop / docHeight) * 100);
       setScrolled(scrollTop > 80);
     };
 
@@ -28,7 +34,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Load saved theme
+  // Theme load
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
@@ -37,25 +43,6 @@ export default function Header() {
     }
   }, []);
 
-  const [cartCount, setCartCount] = useState(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    return cart.length;
-  });
-
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartCount(cart.length);
-    };
-
-    window.addEventListener("cartUpdated", updateCartCount);
-
-    return () => {
-      window.removeEventListener("cartUpdated", updateCartCount);
-    };
-  }, []);
-
-  // Toggle theme
   const toggleTheme = () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
@@ -65,11 +52,7 @@ export default function Header() {
 
   return (
     <>
-      {/* Scroll progress bar */}
-      <div
-        className="scroll-progress"
-        style={{ width: `${scrollProgress}%` }}
-      />
+      <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
 
       <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
         <div className="navbar__container">
@@ -78,15 +61,10 @@ export default function Header() {
           </Link>
 
           <div className="navbar__actions">
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
+            <button className="theme-toggle" onClick={toggleTheme}>
               {darkMode ? "☀️" : "🌙"}
             </button>
 
-            {/* Auth buttons */}
             {!user ? (
               <Link to="/auth" className="btn_red">
                 Login / Sign Up
@@ -98,20 +76,15 @@ export default function Header() {
                     Admin
                   </Link>
                 )}
-
-                <button
-                  className="btn_red"
-                  onClick={logout}
-                  style={{ marginLeft: "8px" }}
-                >
+                <button className="btn_red" onClick={logout}>
                   Logout
                 </button>
               </>
             )}
 
-            <Link to="/Cart" aria-label="Go to cart">
-              <button className="cart-button" aria-label="Cart">
-                <i className="fa-solid fa-cart-shopping"></i>
+            <Link to="/cart">
+              <button className="cart-button">
+                🛒
                 {cartCount > 0 && (
                   <span className="cart-badge">{cartCount}</span>
                 )}
@@ -121,7 +94,6 @@ export default function Header() {
             <button
               className={`navbar__toggle ${open ? "active" : ""}`}
               onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
             >
               <span></span>
               <span></span>
