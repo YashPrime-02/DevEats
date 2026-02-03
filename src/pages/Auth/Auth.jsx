@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LoginForm from "./LoginForm.jsx";
 import SignupForm from "./SignupForm.jsx";
-import "../../styles/auth.css"; 
+import "../../styles/Auth.css";
 
 
 export default function Auth() {
