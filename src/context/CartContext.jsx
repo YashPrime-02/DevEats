@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+// src/context/CartContext.jsx
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { fetchCart } from "../Services/cartService";
 import { useAuth } from "./AuthContext";
 
@@ -9,7 +10,7 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const loadCart = async () => {
+  const loadCart = useCallback(async () => {
     if (!user) {
       setCart([]);
       return;
@@ -25,18 +26,18 @@ export function CartProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     loadCart();
-  }, [user]);
+  }, [loadCart]);
 
   return (
     <CartContext.Provider
       value={{
         cart,
         loading,
-        reloadCart: loadCart, // 🔥 REQUIRED
+        reloadCart: loadCart, // ✅ exposed correctly
       }}
     >
       {children}

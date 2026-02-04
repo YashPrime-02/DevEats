@@ -1,11 +1,14 @@
+// src/pages/Cart/Cart.jsx
 import "../../styles/Cart.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Empty_Cart from "../../assets/cart/empty-cart.webp";
 import { useCart } from "../../context/CartContext";
 import { removeCartItem } from "../../Services/cartService";
+import { placeOrder } from "../../Services/orderService";
 
 export default function Cart() {
   const { cart, loading, reloadCart } = useCart();
+  const navigate = useNavigate();
 
   const handleRemove = async (id) => {
     await removeCartItem(id);
@@ -24,6 +27,16 @@ export default function Cart() {
 
   const deliveryFee = total > 0 ? 40 : 0;
   const grandTotal = total + deliveryFee;
+
+  const handleCheckout = async () => {
+    try {
+      await placeOrder();     // 🔥 DB transaction
+      await reloadCart();     // 🔄 clears active cart
+      navigate("/thank-you"); // ✅ success
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   if (loading) {
     return <p style={{ textAlign: "center" }}>Loading cart...</p>;
@@ -81,9 +94,13 @@ export default function Cart() {
                 <strong>₹{grandTotal}</strong>
               </div>
 
-              <Link to="/thank-you" className="order-now cart__checkout">
+              <button
+                onClick={handleCheckout}
+                className="order-now cart__checkout"
+                disabled={loading}
+              >
                 Proceed to Checkout
-              </Link>
+              </button>
             </div>
           </>
         )}
