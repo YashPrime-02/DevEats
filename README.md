@@ -1,6 +1,6 @@
 # 🍔 DevEats — Food Delivery Platform 
 
-YOMATO is a modern, responsive food delivery web application built using **React + Vite**.  
+DevEats is a modern, responsive food delivery web application built using **React + Vite**.  
 The project focuses on performance, clean UI/UX, accessibility, and scalable architecture, simulating a real-world food delivery platform.
 
 ---
