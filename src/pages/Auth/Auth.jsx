@@ -3,15 +3,17 @@ import LoginForm from "./LoginForm.jsx";
 import SignupForm from "./SignupForm.jsx";
 import "../../styles/Auth.css";
 
-
 export default function Auth() {
-const [mode, setMode] = useState("login");
-console.log("API URL:", import.meta.env.VITE_API_URL);
+  const [mode, setMode] = useState("login");
 
   return (
     <section className="auth-page">
       <div className="auth-card">
-        {/* Toggle */}
+        <h1 className="welcome-title">
+          Welcome to YOMATO Food Delivary App
+        </h1>
+
+        {/* Toggle (STATIC — no animation here) */}
         <div className="auth-toggle">
           <button
             className={mode === "login" ? "active" : ""}
@@ -27,8 +29,14 @@ console.log("API URL:", import.meta.env.VITE_API_URL);
           </button>
         </div>
 
-        {/* Forms */}
-        {mode === "login" ? <LoginForm /> : <SignupForm />}
+        {/* Forms (ANIMATED — remounts on mode change) */}
+        <div key={mode} className="auth-form-wrapper">
+          {mode === "login" ? (
+            <LoginForm />
+          ) : (
+            <SignupForm onSuccess={() => setMode("login")} />
+          )}
+        </div>
       </div>
     </section>
   );
