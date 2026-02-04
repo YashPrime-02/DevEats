@@ -1,4 +1,4 @@
-# 🍔 DevEats — Food Delivery Platform (Frontend)
+# 🍔 DevEats — Food Delivery Platform 
 
 DevEats is a modern, responsive food delivery web application built using **React + Vite**.  
 The project focuses on performance, clean UI/UX, accessibility, and scalable architecture, simulating a real-world food delivery platform.
