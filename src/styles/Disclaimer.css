@@ -1,46 +1,125 @@
+/* ===============================
+   DISCLAIMER PAGE BASE
+================================ */
+
+/* Day mode (default) */
 .disclaimer-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
+  padding: 88px 24px 120px;
+  background: radial-gradient(circle at top, #f6f6f6 0%, #eaeaea 70%);
+  transition: background 0.35s ease;
+}
+
+/* Night mode */
+body.dark .disclaimer-page {
   background: radial-gradient(circle at top, #111 0%, #000 70%);
 }
 
+/* ===============================
+   CARD CONTAINER
+================================ */
 .disclaimer-card {
   max-width: 720px;
-  background: linear-gradient(180deg, #151515, #0b0b0b);
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff, #f4f4f4);
   padding: 42px;
   border-radius: 14px;
+  color: #222;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  transition: background 0.35s ease, color 0.3s ease;
+}
+
+/* Night mode card */
+body.dark .disclaimer-card {
+  background: linear-gradient(180deg, #151515, #0b0b0b);
   color: #ddd;
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(247, 190, 39, 0.15);
 }
 
+/* ===============================
+   HEADER
+================================ */
 .disclaimer-card h1 {
-  color: #f7be27;
-  font-size: 26px;
+  font-size: 28px;
+  line-height: 1.2;
   margin-bottom: 18px;
+  color: #c48a00;
 }
 
+body.dark .disclaimer-card h1 {
+  color: #f7be27;
+}
+
+/* ===============================
+   TEXT CONTENT
+================================ */
 .disclaimer-card p {
-  font-size: 14px;
+  font-size: 14.5px;
   line-height: 1.7;
   margin-bottom: 14px;
+  opacity: 0.9;
 }
 
+/* ===============================
+   POINTS / BULLETS
+================================ */
 .disclaimer-points {
   margin: 16px 0;
   padding-left: 6px;
 }
 
 .disclaimer-points div {
-  margin-bottom: 6px;
   font-size: 14px;
+  margin-bottom: 6px;
+  opacity: 0.9;
 }
 
+/* ===============================
+   NOTES
+================================ */
 .disclaimer-note {
   font-size: 13px;
-  opacity: 0.85;
+  opacity: 0.75;
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+.disclaimer-card a:focus-visible {
+  outline: 3px solid #f7be27;
+  outline-offset: 4px;
+}
+
+/* ===============================
+   REDUCED MOTION
+================================ */
+@media (prefers-reduced-motion: reduce) {
+  .disclaimer-page,
+  .disclaimer-card {
+    transition: none;
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 576px) {
+  .disclaimer-card {
+    padding: 32px 26px;
+  }
+
+  .disclaimer-card h1 {
+    font-size: 24px;
+  }
+
+  .disclaimer-card p {
+    font-size: 14px;
+  }
 }
