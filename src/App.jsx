@@ -17,6 +17,9 @@ const Terms = lazy(() => import("./pages/terms/termsWrapper"));
 const FAQ = lazy(() => import("./pages/FAQ/FAQWrapper"));
 const ThankYou = lazy(() => import("./pages/ThankYou/ThankYouWrapper"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFoundWrapper"));
+const DisclaimerWrapper = lazy(() => import("./pages/Disclaimer/DisclaimerWrapper"));
+
+// Components
 
 import PageLoader from "./components/PageLoader";
 import ScrollToTop from "./components/ScrollToTop";
@@ -40,6 +43,8 @@ export default function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/disclaimer" element={<DisclaimerWrapper />} />
+
 
           {/* ❌*/}
           <Route path="*" element={<NotFound />} />

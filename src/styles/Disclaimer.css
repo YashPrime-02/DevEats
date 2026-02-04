@@ -1,0 +1,46 @@
+.disclaimer-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+}
+
+.disclaimer-card {
+  max-width: 720px;
+  background: linear-gradient(180deg, #151515, #0b0b0b);
+  padding: 42px;
+  border-radius: 14px;
+  color: #ddd;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(247, 190, 39, 0.15);
+}
+
+.disclaimer-card h1 {
+  color: #f7be27;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.disclaimer-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.disclaimer-points {
+  margin: 16px 0;
+  padding-left: 6px;
+}
+
+.disclaimer-points div {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.disclaimer-note {
+  font-size: 13px;
+  opacity: 0.85;
+}

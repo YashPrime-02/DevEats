@@ -81,6 +81,7 @@ export default function Footer() {
             <Link to="/menu">Explore Full Menu</Link>
             <Link to="/About">About</Link>
             <Link to="/contact">Contact</Link>
+            <Link to="/disclaimer">Disclaimer</Link>
           </div>
 
           {/* Map */}
