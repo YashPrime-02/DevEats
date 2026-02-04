@@ -25,7 +25,7 @@ const FAQ_DATA = [
   {
     question: "How can I contact customer support?",
     answer:
-      "You can reach us via the Contact page or email us at support@yomato.com.",
+      "You can reach us via the Contact page or email us at support@DevEats.com.",
   },
 ];
 

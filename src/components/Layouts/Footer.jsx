@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer__brand">
             <Link to="/" className="footer__brand-link">
-              <h3>YOMATO Food Delivery</h3>
+              <h3>DevEats Food Delivery</h3>
             </Link>
 
             <p>Cravings delivered at your doorstep.</p>
@@ -119,7 +119,7 @@ export default function Footer() {
 
             {/* Right copyright */}
             <div className="footer__copyright">
-              © {new Date().getFullYear()} YOMATO Food Delivery. All rights
+              © {new Date().getFullYear()} DevEats Food Delivery. All rights
               reserved.
             </div>
           </div>

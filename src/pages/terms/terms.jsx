@@ -13,7 +13,7 @@ export default function Terms() {
           <section>
             <h2>1. Service Usage</h2>
             <p>
-              By accessing YOMATO, you agree to use our platform only for lawful
+              By accessing DevEats, you agree to use our platform only for lawful
               food ordering purposes.
             </p>
           </section>
@@ -37,7 +37,7 @@ export default function Terms() {
           <section>
             <h2>4. Liability</h2>
             <p>
-              YOMATO shall not be held responsible for delays caused by external
+              DevEats shall not be held responsible for delays caused by external
               factors beyond our control.
             </p>
           </section>

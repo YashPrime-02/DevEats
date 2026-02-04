@@ -127,9 +127,9 @@ export default function Contact() {
             <h3>Reach Us</h3>
 
             <p>
-              <strong>YOMATO Food Delivery</strong>
+              <strong>DevEats Food Delivery</strong>
             </p>
-            <p>Email: support@yomato.com</p>
+            <p>Email: support@DevEats.com</p>
             <p>Phone: +91 98765 43210</p>
             <p>Lucknow, India</p>
           </div>

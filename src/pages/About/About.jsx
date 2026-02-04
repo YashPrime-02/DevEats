@@ -50,14 +50,14 @@ export default function About() {
           <span
             className="about__brand"
             aria-live="polite"
-            aria-label="YOMATO in multiple languages"
+            aria-label="DevEats in multiple languages"
           >
-            <span>YOMATO</span>
+            <span>DevEats</span>
             <span>योमाटो</span>
             <span>யோமாடோ</span>
             <span>ヨマト</span>
             <span>요마토</span>
-            <span>YOMATO</span>
+            <span>DevEats</span>
           </span>
         </h2>
 
@@ -66,7 +66,7 @@ export default function About() {
         </p>
 
         <p id="about-description" className="about__description">
-          YOMATO is a technology-driven food delivery platform designed to
+          DevEats is a technology-driven food delivery platform designed to
           remove friction from everyday dining. From intelligent restaurant
           discovery to precision-driven logistics, we focus on delivering
           consistency, transparency, and trust at every step of the journey.
@@ -95,7 +95,7 @@ export default function About() {
         {[
           {
             title: "2019 — The Vision",
-            text: "YOMATO was conceived to solve a fundamental problem: food delivery should be predictable, transparent, and reliable. We began by designing systems that prioritize accuracy over speed alone.",
+            text: "DevEats was conceived to solve a fundamental problem: food delivery should be predictable, transparent, and reliable. We began by designing systems that prioritize accuracy over speed alone.",
           },
           {
             title: "2020 — First Launch",
@@ -111,7 +111,7 @@ export default function About() {
           },
           {
             title: "2023 — Customer-First Platform",
-            text: "With millions of successful deliveries, YOMATO evolved into a platform trusted for consistency, data-driven operations, and user-centric design.",
+            text: "With millions of successful deliveries, DevEats evolved into a platform trusted for consistency, data-driven operations, and user-centric design.",
           },
         ].map((item, index) => (
           <article

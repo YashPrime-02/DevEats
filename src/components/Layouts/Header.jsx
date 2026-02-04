@@ -57,7 +57,7 @@ export default function Header() {
       <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
         <div className="navbar__container">
           <Link to="/" className="navbar__logo">
-            YOMATO Food Delivery
+            DevEats Food Delivery
           </Link>
 
           <div className="navbar__actions">

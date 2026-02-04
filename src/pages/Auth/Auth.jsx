@@ -10,7 +10,7 @@ export default function Auth() {
     <section className="auth-page">
       <div className="auth-card">
         <h1 className="welcome-title">
-          Welcome to YOMATO Food Delivary App
+          Welcome to DevEats Food Delivary App
         </h1>
 
         {/* Toggle (STATIC — no animation here) */}
