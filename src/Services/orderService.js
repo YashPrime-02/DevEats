@@ -35,3 +35,14 @@ export async function fetchOrders() {
   if (!res.ok) throw new Error("Failed to fetch orders");
   return res.json();
 }
+
+// 🔍 Fetch order by ID
+export async function fetchOrderById(id) {
+  const res = await fetch(`${API}/api/orders/${id}`, {
+    headers: getAuthHeaders(),
+  });
+
+  if (!res.ok) throw new Error("Failed to load order");
+  return res.json();
+}
+

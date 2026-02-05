@@ -19,11 +19,14 @@ const ThankYou = lazy(() => import("./pages/ThankYou/ThankYouWrapper"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFoundWrapper"));
 const DisclaimerWrapper = lazy(() => import("./pages/Disclaimer/DisclaimerWrapper"));
 const OrderHistory = lazy(() => import("./pages/Orders/OrderHistory"));
+const OrderDetail = lazy(() => import("./pages/Orders/OrderDetail"));
+const AdminOrders = lazy(() => import("./pages/Admin/AdminOrders"));
 // Components
 
 import PageLoader from "./components/PageLoader";
 import ScrollToTop from "./components/ScrollToTop";
 import AuthGuard from "./components/Guards/AuthGuard";
+import AdminGuard from "./components/Guards/AdminGuard";
 
 export default function App() {
   return (
@@ -38,6 +41,8 @@ export default function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/cart" element={ <AuthGuard> <CartPage /></AuthGuard> }/>
           <Route path="/orders" element={<AuthGuard><OrderHistory /></AuthGuard>} />
+          <Route path="/orders/:id" element={<AuthGuard><OrderDetail /></AuthGuard>} />
+          <Route path="/admin/orders" element={ <AdminGuard> <AdminOrders /></AdminGuard>}/>
           <Route path="/brand" element={<Brand />} />
           <Route path="/contact" element={<ContactWrapper />} />
           <Route path="/privacy" element={<PrivacyWrapper />} />

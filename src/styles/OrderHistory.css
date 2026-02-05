@@ -1,0 +1,116 @@
+/* ===============================
+   ORDER HISTORY PAGE
+   (No HTML changed)
+================================ */
+
+.orderHistory {
+  padding: 40px;
+  /* max-width: 900px; */
+  /* margin: 0 auto; */
+}
+
+.orderHistory__title {
+  font-size: 34px;
+  font-weight: 800;
+  margin: 0 0 18px;
+  letter-spacing: 0.2px;
+}
+
+.orderHistory__loading {
+  padding: 40px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.orderHistory__empty {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* List */
+.orderHistory__list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+
+  display: grid;
+  gap: 14px;
+}
+
+/* Card */
+.orderHistory__card {
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+
+  display: grid;
+  gap: 6px;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.orderHistory__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Button spacing */
+.orderHistory__btn {
+  margin-top: 8px;
+  display: inline-block;
+}
+
+/* ===============================
+   DARK MODE SUPPORT
+================================ */
+
+body.dark .orderHistory__title {
+  color: #fff;
+}
+
+body.dark .orderHistory__card {
+  background: rgba(18, 18, 18, 0.65);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+}
+
+body.dark .orderHistory__loading,
+body.dark .orderHistory__empty {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .orderHistory {
+    padding: 28px 16px;
+  }
+
+  .orderHistory__title {
+    font-size: 26px;
+  }
+
+  .orderHistory__card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .orderHistory__title {
+    font-size: 22px;
+  }
+
+  .orderHistory__card {
+    padding: 12px;
+  }
+}
