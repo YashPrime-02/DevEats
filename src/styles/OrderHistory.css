@@ -114,3 +114,65 @@ body.dark .orderHistory__empty {
     padding: 12px;
   }
 }
+
+
+/* ===============================
+   ORDER DETAIL ACTIONS
+================================ */
+
+.orderDetail__actions {
+  margin: 18px 0 26px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.orderDetail__backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  color: #000;
+  background: transparent;
+
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.orderDetail__backBtn:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  transform: translateX(-2px);
+}
+
+/* Dark mode */
+body.dark .orderDetail__backBtn {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+body.dark .orderDetail__backBtn:hover {
+  background: #f7be27;
+  color: #000;
+  border-color: #f7be27;
+}
+
+/* Mobile */
+@media (max-width: 520px) {
+  .orderDetail__actions {
+    justify-content: center;
+  }
+}

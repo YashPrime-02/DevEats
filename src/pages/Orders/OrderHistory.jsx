@@ -17,6 +17,11 @@ export default function OrderHistory() {
 
   return (
     <section className="orderHistory">
+      <div className="orderDetail__actions">
+              <Link to="/" className="orderDetail__backBtn">
+                ← Back to Home
+              </Link>
+            </div>
       <h2 className="orderHistory__title">Your Orders</h2>
 
       {orders.length === 0 ? (
