@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchOrderById } from "../../Services/orderService";
 import "../../styles/Orders.css";
 import { Link } from "react-router-dom";
-import '../../styles/OrderHistory.css';
-
-
+import "../../styles/OrderHistory.css";
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -72,7 +70,8 @@ export default function OrderDetail() {
           {items.map((item, idx) => (
             <li className="orderDetail__item" key={idx}>
               <div className="orderDetail__imgWrap">
-                <img src={item.image_url} alt={item.name} />
+                {/* <img src={item.image_url} alt={item.name} /> */}
+                <h4 className="orderDetail__name">{Number(idx) + 1}</h4>
               </div>
 
               <div className="orderDetail__info">
