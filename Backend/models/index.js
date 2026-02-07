@@ -11,35 +11,52 @@ const db = {};
 
 /**
  * IMPORTANT:
- * - We DO NOT read config.json here
- * - We use .env directly
- * - This avoids port NaN / rename issues
+ * - Local uses DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT
+ * - Production (Neon/Render) uses DATABASE_URL
+ * - Neon requires SSL
  */
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
+let sequelize;
+
+if (process.env.DATABASE_URL) {
+  // ✅ Neon / Production connection
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    logging: false, // 🔒 keep logs clean
-  }
-);
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  });
+} else {
+  // ✅ Local connection (same as before)
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      dialect: 'postgres',
+      logging: false,
+    }
+  );
+}
 
 /**
  * Load all model files
  */
 fs.readdirSync(__dirname)
-  .filter(file => {
+  .filter((file) => {
     return (
       file.indexOf('.') !== 0 &&
       file !== basename &&
       file.endsWith('.js')
     );
   })
-  .forEach(file => {
+  .forEach((file) => {
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes
@@ -50,7 +67,7 @@ fs.readdirSync(__dirname)
 /**
  * Setup associations (we’ll add later, not now)
  */
-Object.keys(db).forEach(modelName => {
+Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
