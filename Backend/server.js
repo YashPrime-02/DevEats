@@ -21,13 +21,15 @@ app.use("/api/cart", cartRoutes);
 
 
 // app.use("/api/order", orderRoutes);
-- app.use("/api/orders", orderRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use("/api/admin", adminRoutes);
 
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 Server running on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
