@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 const API = import.meta.env.VITE_API_URL;
-import AdminOrders from './AdminOrders';
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -19,7 +18,6 @@ export default function AdminOrders() {
   return (
     <section style={{ padding: "40px" }}>
       <h2>All Orders</h2>
-      
 
       <table width="100%" style={{ marginTop: "20px" }}>
         <thead>
@@ -44,7 +42,6 @@ export default function AdminOrders() {
           ))}
         </tbody>
       </table>
-
     </section>
   );
 }
