@@ -6,10 +6,23 @@ exports.addToCart = async (req, res, next) => {
     const userId = req.user.id;
     const { external_item_id, name, price, image_url, quantity } = req.body;
 
-    console.log("🛒 Add to cart:", external_item_id);
+    // ✅ Basic validation
+    if (!external_item_id || !name || price === undefined || !quantity) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields",
+      });
+    }
 
-    // 1️⃣ Get or create cart
-    let cartQuery = await pool.query(
+    if (Number(quantity) < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Quantity must be at least 1",
+      });
+    }
+
+    // 1️⃣ Get or create active cart
+    const cartQuery = await pool.query(
       "SELECT id FROM carts WHERE user_id = $1 AND status = 'active'",
       [userId]
     );
@@ -18,7 +31,7 @@ exports.addToCart = async (req, res, next) => {
 
     if (cartQuery.rows.length === 0) {
       const newCart = await pool.query(
-        "INSERT INTO carts (user_id) VALUES ($1) RETURNING id",
+        "INSERT INTO carts (user_id, status) VALUES ($1, 'active') RETURNING id",
         [userId]
       );
       cartId = newCart.rows[0].id;
@@ -28,7 +41,7 @@ exports.addToCart = async (req, res, next) => {
 
     // 2️⃣ Check if item exists
     const itemCheck = await pool.query(
-      "SELECT * FROM cart_items WHERE cart_id=$1 AND external_item_id=$2",
+      "SELECT id, quantity FROM cart_items WHERE cart_id=$1 AND external_item_id=$2",
       [cartId, external_item_id]
     );
 
@@ -39,10 +52,13 @@ exports.addToCart = async (req, res, next) => {
       );
     } else {
       await pool.query(
-        `INSERT INTO cart_items
-        (cart_id, external_item_id, name, price, image_url, quantity)
-        VALUES ($1,$2,$3,$4,$5,$6)`,
-        [cartId, external_item_id, name, price, image_url, quantity]
+        `
+        INSERT INTO cart_items
+          (cart_id, external_item_id, name, price, image_url, quantity)
+        VALUES
+          ($1,$2,$3,$4,$5,$6)
+        `,
+        [cartId, external_item_id, name, price, image_url || null, quantity]
       );
     }
 
@@ -57,25 +73,60 @@ exports.getCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    const result = await pool.query(`
-      SELECT ci.*
-      FROM carts c
-      JOIN cart_items ci ON c.id = ci.cart_id
-      WHERE c.user_id = $1 AND c.status='active'
-    `, [userId]);
+    // 1️⃣ Find active cart
+    const cartRes = await pool.query(
+      "SELECT id FROM carts WHERE user_id = $1 AND status='active'",
+      [userId]
+    );
 
-    res.json(result.rows);
+    // If no cart exists, return empty
+    if (cartRes.rows.length === 0) {
+      return res.json([]);
+    }
+
+    const cartId = cartRes.rows[0].id;
+
+    // 2️⃣ Get items
+    const itemsRes = await pool.query(
+      `
+      SELECT id, external_item_id, name, price, image_url, quantity
+      FROM cart_items
+      WHERE cart_id = $1
+      ORDER BY id DESC
+      `,
+      [cartId]
+    );
+
+    res.json(itemsRes.rows);
   } catch (err) {
     next(err);
   }
 };
 
-// ❌ REMOVE ITEM
+// ❌ REMOVE ITEM (SECURE)
 exports.removeItem = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const userId = req.user.id;
+    const itemId = req.params.id;
 
-    await pool.query("DELETE FROM cart_items WHERE id=$1", [id]);
+    const result = await pool.query(
+      `
+      DELETE FROM cart_items ci
+      USING carts c
+      WHERE ci.id = $1
+        AND ci.cart_id = c.id
+        AND c.user_id = $2
+        AND c.status = 'active'
+      `,
+      [itemId, userId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Cart item not found",
+      });
+    }
 
     res.json({ success: true, message: "Item removed" });
   } catch (err) {

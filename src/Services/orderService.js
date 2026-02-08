@@ -1,5 +1,8 @@
-// src/Services/orderService.js
-const API = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API = import.meta.env.VITE_API_URL;
+
+if (!API) {
+  throw new Error("VITE_API_URL is not defined");
+}
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
@@ -18,12 +21,13 @@ export async function placeOrder() {
     headers: getAuthHeaders(),
   });
 
+  const data = await res.json();
+
   if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || "Order failed");
+    throw new Error(data.message || "Order failed");
   }
 
-  return res.json();
+  return data;
 }
 
 // 📜 Fetch order history
@@ -32,8 +36,13 @@ export async function fetchOrders() {
     headers: getAuthHeaders(),
   });
 
-  if (!res.ok) throw new Error("Failed to fetch orders");
-  return res.json();
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to fetch orders");
+  }
+
+  return data;
 }
 
 // 🔍 Fetch order by ID
@@ -42,7 +51,11 @@ export async function fetchOrderById(id) {
     headers: getAuthHeaders(),
   });
 
-  if (!res.ok) throw new Error("Failed to load order");
-  return res.json();
-}
+  const data = await res.json();
 
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to load order");
+  }
+
+  return data;
+}

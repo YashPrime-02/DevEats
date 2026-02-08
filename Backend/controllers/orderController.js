@@ -16,7 +16,10 @@ exports.placeOrder = async (req, res, next) => {
     );
 
     if (cartResult.rows.length === 0) {
-      throw { message: "No active cart found", status: 400 };
+      return res.status(400).json({
+        success: false,
+        message: "No active cart found",
+      });
     }
 
     const cartId = cartResult.rows[0].id;
@@ -28,33 +31,42 @@ exports.placeOrder = async (req, res, next) => {
     );
 
     if (itemsResult.rows.length === 0) {
-      throw { message: "Cart is empty", status: 400 };
+      return res.status(400).json({
+        success: false,
+        message: "Cart is empty",
+      });
     }
 
     const items = itemsResult.rows;
 
     // 3️⃣ Calculate total
     const totalAmount = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + Number(item.price) * Number(item.quantity),
       0
     );
 
     // 4️⃣ Create order
     const orderResult = await client.query(
-      `INSERT INTO orders (user_id, total_amount)
-       VALUES ($1, $2)
-       RETURNING id`,
+      `
+      INSERT INTO orders (user_id, total_amount, status)
+      VALUES ($1, $2, 'placed')
+      RETURNING id, total_amount, status, created_at
+      `,
       [userId, totalAmount]
     );
 
-    const orderId = orderResult.rows[0].id;
+    const orderRow = orderResult.rows[0];
+    const orderId = orderRow.id;
 
     // 5️⃣ Copy items into order_items
-    for (let item of items) {
+    for (const item of items) {
       await client.query(
-        `INSERT INTO order_items
-        (order_id, external_item_id, name, price, image_url, quantity)
-        VALUES ($1,$2,$3,$4,$5,$6)`,
+        `
+        INSERT INTO order_items
+          (order_id, external_item_id, name, price, image_url, quantity)
+        VALUES
+          ($1,$2,$3,$4,$5,$6)
+        `,
         [
           orderId,
           item.external_item_id,
@@ -77,7 +89,12 @@ exports.placeOrder = async (req, res, next) => {
     res.json({
       success: true,
       message: "Order placed successfully",
-      orderId,
+      order: {
+        id: orderId,
+        total_amount: orderRow.total_amount,
+        status: orderRow.status,
+        created_at: orderRow.created_at,
+      },
     });
   } catch (err) {
     await client.query("ROLLBACK");
@@ -87,17 +104,18 @@ exports.placeOrder = async (req, res, next) => {
   }
 };
 
-
 // 📜 GET USER ORDERS
 exports.getOrders = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
     const result = await pool.query(
-      `SELECT id, total_amount, status, created_at
-       FROM orders
-       WHERE user_id = $1
-       ORDER BY created_at DESC`,
+      `
+      SELECT id, total_amount, status, created_at
+      FROM orders
+      WHERE user_id = $1
+      ORDER BY created_at DESC
+      `,
       [userId]
     );
 
@@ -114,16 +132,23 @@ exports.getOrderById = async (req, res, next) => {
     const orderId = req.params.id;
 
     const result = await pool.query(
-      `SELECT o.id, o.total_amount, o.status, o.created_at,
-              oi.external_item_id, oi.name, oi.price, oi.quantity
-       FROM orders o
-       JOIN order_items oi ON o.id = oi.order_id
-       WHERE o.user_id = $1 AND o.id = $2`,
+      `
+      SELECT o.id, o.total_amount, o.status, o.created_at,
+             oi.id as order_item_id,
+             oi.external_item_id, oi.name, oi.price, oi.image_url, oi.quantity
+      FROM orders o
+      JOIN order_items oi ON o.id = oi.order_id
+      WHERE o.user_id = $1 AND o.id = $2
+      ORDER BY oi.id DESC
+      `,
       [userId, orderId]
     );
 
     if (result.rows.length === 0) {
-      throw { message: "Order not found", status: 404 };
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
     }
 
     res.json(result.rows);
