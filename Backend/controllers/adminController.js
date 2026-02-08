@@ -45,3 +45,20 @@ exports.getRevenue = async (req, res, next) => {
     next(err);
   }
 };
+
+// 📩 Get All Contacts (Admin)
+exports.getContacts = async (req, res, next) => {
+  try {
+    const result = await pool.query(
+      `
+      SELECT id, name, email, message, created_at
+      FROM contacts
+      ORDER BY created_at DESC
+      `
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+};
