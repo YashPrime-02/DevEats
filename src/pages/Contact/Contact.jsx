@@ -11,7 +11,9 @@ export default function Contact() {
 
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
+
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   // Validation rules
   const isNameValid = form.name.trim().length >= 3;
@@ -22,6 +24,10 @@ export default function Contact() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+
+    // ✅ remove messages when typing
+    setError("");
+    setSuccess("");
   };
 
   const handleBlur = (e) => {
@@ -35,12 +41,19 @@ export default function Contact() {
     try {
       setSubmitted(true);
       setError("");
+      setSuccess("");
 
       await submitContact(form);
 
       // ✅ Clear form after success
       setForm({ name: "", email: "", message: "" });
       setTouched({});
+
+      // ✅ Show success
+      setSuccess("Your message has been sent successfully. We’ll contact you soon!");
+
+      // ✅ Auto hide success after 4 sec
+      setTimeout(() => setSuccess(""), 4000);
     } catch (err) {
       setError(err.message || "Failed to send message");
     } finally {
@@ -119,8 +132,10 @@ export default function Contact() {
                 </span>
               )}
             </div>
-  
-              {error && <p className="error">{error}</p>}
+
+            {/* ✅ Success + Error messages */}
+            {success && <p className="success">{success}</p>}
+            {error && <p className="error">{error}</p>}
 
             <button
               type="submit"
@@ -128,7 +143,7 @@ export default function Contact() {
               disabled={!isFormValid || submitted}
               aria-disabled={!isFormValid || submitted}
             >
-              {submitted ? "Message Sent ✓" : "Send Message"}
+              {submitted ? "Sending..." : "Send Message"}
             </button>
           </form>
 

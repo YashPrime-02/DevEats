@@ -113,6 +113,18 @@ body.dark .form-group textarea {
   border-color: #2e7d32;
 }
 
+
+.success {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(0, 200, 120, 0.12);
+  border: 1px solid rgba(0, 200, 120, 0.4);
+  color: #00c878;
+}
+
+
 /* ===============================
    ERROR TEXT
 ================================ */
