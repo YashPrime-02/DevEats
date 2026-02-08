@@ -1,54 +1,89 @@
-# 🍔 DevEats — Food Delivery Platform 
+# 🍔 DevEats — Full Stack Food Delivery Platform
 
-DevEats is a modern, responsive food delivery web application built using **React + Vite**.  
-The project focuses on performance, clean UI/UX, accessibility, and scalable architecture, simulating a real-world food delivery platform.
+DevEats is a modern, responsive **full-stack food delivery web application** built with:
+
+- **Frontend:** React + Vite (deployed on **Vercel**)
+- **Backend:** Node.js + Express (deployed on **Render**)
+- **Database:** PostgreSQL (hosted on **Supabase**)
+
+The project focuses on real-world architecture, clean UI/UX, accessibility, and scalable features like **JWT authentication, DB-based cart, order placement, order history, and admin order management**.
 
 ---
 
-## 🚀 Live Features
+## 🌐 Live Modules
 
+### 👤 User Features
+- 🔐 JWT Authentication (Register / Login)
 - 🧾 Dynamic food menu powered by a public REST API
-- 🛒 Cart system with localStorage persistence
-- 🔍 Veg / Non-Veg filtering
-- ⚡ Fast performance with Vite
+- 🛒 **User-based cart stored in PostgreSQL** (not shared across users)
+- ➕ Add to cart / remove from cart
+- 🧾 Checkout → Places order in DB
+- 📜 Order History
+- 📦 Order Detail (items + totals + images)
 - 🎨 Modern UI with animations and gradients
 - ♿ Accessibility-first components (ARIA, keyboard support)
 - 📱 Fully responsive (mobile, tablet, desktop)
 - 🧭 Central layout system (Header + Footer)
-- 📜 Legal pages (Privacy, Terms, FAQ)
+- 📜 Legal pages (Privacy, Terms, FAQ, Disclaimer)
 - 📊 Animated About page with scroll-based timeline
-- 🌐 Multi-language brand animation (Indian + foreign scripts)
+- 🌐 Brand animation (multi-language scripts)
+
+### 🛡️ Admin Features
+- 👥 View users
+- 📦 View all orders
+- 💰 Revenue stats
+- 🧾 Admin order management page (frontend)
 
 ---
 
 ## 🧱 Tech Stack
 
-- **Frontend:** React 18
-- **Bundler:** Vite
-- **Styling:** Plain CSS (no Tailwind)
-- **Routing:** React Router DOM
-- **State Management:** React Hooks
-- **API:** Public Food Menu API
-- **Storage:** localStorage
-- **Linting:** ESLint
-- **Accessibility:** ARIA roles & reduced-motion support
+### Frontend
+- React 18
+- Vite
+- React Router DOM
+- Plain CSS (no Tailwind)
+- ESLint
+- Lighthouse testing (Performance + Accessibility)
+
+### Backend
+- Node.js
+- Express.js
+- PostgreSQL
+- JWT Authentication
+- bcrypt password hashing
+- Middleware: auth guard, admin guard, error handler, request logger
+
+### Database (Supabase)
+- PostgreSQL schema for:
+  - users
+  - carts
+  - cart_items
+  - orders
+  - order_items
 
 ---
 
-## 📁 Project Structure
-# Project File Structure
+## 🔗 Public Menu API Used
 
-This document describes the complete folder and file structure of the **Food Delivery App**, including both **Backend (Node.js + Sequelize)** and **Frontend (React + Vite)**.
+Food menu data is fetched from:
+
+```
+https://free-food-menus-api-two.vercel.app/burgers
+```
+
+API responses are transformed on the frontend to match UI requirements.
 
 ---
 
-## Root Directory
+## 📁 Project Structure (Frontend + Backend)
+
+### Root Directory
 
 ```
 FOOD-DELIVERY-APP/
 │
 ├── Backend/
-├── node_modules/
 ├── public/
 ├── src/
 │
@@ -67,12 +102,13 @@ FOOD-DELIVERY-APP/
 
 ---
 
-## Backend Structure (`Backend/`)
+## 🧩 Backend Structure (`Backend/`)
 
 ```
 Backend/
 │
 ├── config/
+│   └── db.js
 │
 ├── controllers/
 │   ├── adminController.js
@@ -86,8 +122,6 @@ Backend/
 │   ├── errorHandler.js
 │   └── logger.js
 │
-├── migrations/
-│
 ├── models/
 │   ├── adminLog.js
 │   ├── cart.js
@@ -99,20 +133,22 @@ Backend/
 │   └── user.js
 │
 ├── routes/
-│
-├── seeders/
+│   ├── adminRoutes.js
+│   ├── authRoutes.js
+│   ├── cartRoutes.js
+│   └── orderRoutes.js
 │
 ├── .env
 ├── package.json
 ├── package-lock.json
 ├── server.js
 ├── Structure.md
-├── test-sequelize.js
+└── test-sequelize.js
 ```
 
 ---
 
-## Frontend Structure (`src/`)
+## 🎨 Frontend Structure (`src/`)
 
 ```
 src/
@@ -133,131 +169,191 @@ src/
 │   └── react.svg
 │
 ├── components/
-│   └── Layouts/
-│       ├── PageLoader.jsx
-│       └── ScrollToTop.jsx
+│   ├── Guards/
+│   │   ├── AuthGuard.jsx
+│   │   └── AdminGuard.jsx
+│   │
+│   ├── Layouts/
+│   │   ├── PageLoader.jsx
+│   │   └── ScrollToTop.jsx
+│   │
+│   └── PageLoader.jsx
+│
+├── context/
+│   ├── AuthContext.jsx
+│   └── CartContext.jsx
 │
 ├── pages/
 │   ├── About/
-│   │   ├── About.jsx
-│   │   └── AboutWrapper.jsx
-│   │
+│   ├── Admin/
+│   ├── Auth/
 │   ├── Brands/
-│   │   └── Brand.jsx
-│   │
 │   ├── Cart/
-│   │   ├── Cart_Page.jsx
-│   │   └── Cart.jsx
-│   │
 │   ├── Contact/
-│   │   ├── Contact.jsx
-│   │   └── ContactWrapper.jsx
-│   │
+│   ├── Disclaimer/
 │   ├── FAQ/
-│   │   ├── FAQ.jsx
-│   │   └── FAQWrapper.jsx
-│   │
 │   ├── Home/
-│   │   ├── App_Download.jsx
-│   │   ├── Hero.jsx
-│   │   ├── Home_About.jsx
-│   │   ├── Home_menu.jsx
-│   │   ├── Home_Promo.jsx
-│   │   ├── Home.jsx
-│   │   └── Parallax.jsx
-│   │
 │   ├── Menu/
-│   │   └── Menu.jsx
-│   │
 │   ├── NotFound/
-│   │   ├── NotFound.jsx
-│   │   └── NotFoundWrapper.jsx
-│   │
+│   ├── Orders/
+│   │   ├── OrderHistory.jsx
+│   │   └── OrderDetail.jsx
 │   ├── privacy/
-│   │   ├── privacy.jsx
-│   │   └── privacyWrapper.jsx
-│   │
 │   ├── terms/
-│   │   ├── terms.jsx
-│   │   └── termsWrapper.jsx
-│   │
 │   └── ThankYou/
-│       ├── ThankYou.jsx
-│       └── ThankYouWrapper.jsx
 │
 ├── Services/
-│   └── menuService.js
+│   ├── authService.js
+│   ├── cartService.js
+│   ├── menuService.js
+│   └── orderService.js
 │
 ├── styles/
-│   └── App.css
+│   ├── App.css
+│   ├── Header.css
+│   ├── Cart.css
+│   ├── Orders.css
+│   └── (other page styles)
 │
 ├── App.jsx
-├── main.jsx
+└── main.jsx
 ```
 
 ---
 
-## Summary
+## ⚙️ Environment Setup
 
-- **Backend** follows a clean MVC structure with controllers, middleware, Sequelize models, migrations, and seeders.
-- **Frontend** is built with **React + Vite**, using:
-  - `pages/` for route-level views
-  - `components/Layouts/` for shared UI logic
-  - `assets/` organized by feature/section
-  - `Services/` for API/service abstraction
-- The project is **deployment-ready** with `vercel.json`.
+### ✅ Frontend `.env` (Vercel + Local)
 
-## 🔗 API Used
+Create a `.env` file in the **project root**:
 
-Food menu data is fetched from:
-
-
-
-https://free-food-menus-api-two.vercel.app/burgers
-
-
-API responses are transformed on the frontend to match UI requirements.
-
----
-
-## 🌱 Environment Setup (Vite)
-
-Create a `.env` file in the project root:
-
-
-
+```env
 VITE_BASE_URL=https://free-food-menus-api-two.vercel.app
+VITE_API_URL=http://localhost:3000
+```
 
+For production on Vercel:
 
-> Only variables prefixed with `VITE_` are exposed to the client.
+```env
+VITE_BASE_URL=https://free-food-menus-api-two.vercel.app
+VITE_API_URL=https://your-render-backend-url.onrender.com
+```
 
 ---
 
-## 🛠️ Installation & Run
+### ✅ Backend `.env` (Render + Local)
 
+Create a `.env` file inside `Backend/`:
 
+```env
+PORT=3000
+NODE_ENV=development
 
+DATABASE_URL=postgresql://postgres:password@localhost:5432/deveats_db
+
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1d
+```
+
+For production (Render + Supabase):
+
+```env
+PORT=3000
+NODE_ENV=production
+
+DATABASE_URL=postgresql://postgres:YOUR_PASS@db.xxxxx.supabase.co:5432/postgres
+
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1d
+```
+
+> Supabase requires SSL. In production, your backend `Pool()` should enable SSL.
+
+---
+
+## 🛠️ Installation & Run (Local)
+
+### 1) Clone repo
+```bash
 git clone <your-repo-url>
-cd DevEats
+cd FOOD-DELIVERY-APP
+```
+
+### 2) Install frontend dependencies
+```bash
 npm install
 npm run dev
+```
 
+Frontend runs on:
 
-The application will run at:
-
-
-
+```
 http://localhost:5173
-
+```
 
 ---
 
-## 🧪 Linting
+### 3) Run backend
+```bash
+cd Backend
+npm install
+node server.js
+```
 
+Backend runs on:
 
+```
+http://localhost:3000
+```
 
-npm run lint
+---
 
+## 🔌 API Routes Summary
+
+### Auth
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+
+### Cart (User Based)
+- `GET /api/cart`
+- `POST /api/cart/add`
+- `DELETE /api/cart/:id`
+
+### Orders (User Based)
+- `POST /api/order/place`
+- `GET /api/order`
+- `GET /api/order/:id`
+
+### Admin (Protected)
+- `GET /api/admin/users`
+- `GET /api/admin/orders`
+- `GET /api/admin/revenue`
+
+---
+
+## 🚀 Deployment (Production)
+
+Correct deployment order:
+
+### 1) Supabase (PostgreSQL)
+- Create DB
+- Import schema
+- Add cart partial unique index:
+  ```sql
+  CREATE UNIQUE INDEX one_active_cart_per_user
+  ON carts(user_id)
+  WHERE status = 'active';
+  ```
+
+### 2) Render (Backend)
+- Deploy Node/Express
+- Add `DATABASE_URL`, `JWT_SECRET`, `NODE_ENV=production`
+- Enable CORS for Vercel domain
+
+### 3) Vercel (Frontend)
+- Add env:
+  - `VITE_API_URL=<render-backend-url>`
+  - `VITE_BASE_URL=<menu-api-url>`
 
 ---
 
@@ -274,7 +370,7 @@ npm run lint
 ## 🎯 Design Philosophy
 
 - Real-world scalable structure  
-- Clear separation of concerns  
+- Clean separation of concerns  
 - Reusable layouts and components  
 - Performance-first rendering  
 - Readable, maintainable code  
@@ -282,13 +378,12 @@ npm run lint
 ---
 
 ## 📌 Future Improvements
-
-- User authentication  
-- Order history  
-- Payment gateway integration  
-- Admin dashboard  
-- Backend with Node.js & Express  
-- Database integration  
+- Payment gateway integration
+- Address management
+- Real restaurant catalog
+- Coupons and discounts
+- Delivery tracking system
+- OTP / email verification
 
 ---
 
@@ -296,7 +391,3 @@ npm run lint
 
 This project is created for learning and demonstration purposes only.  
 All brand names and APIs belong to their respective owners.
-
----
-
-**Built with focus, discipline, and real-world engineering practices.**
