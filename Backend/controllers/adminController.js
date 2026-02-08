@@ -45,21 +45,3 @@ exports.getRevenue = async (req, res, next) => {
     next(err);
   }
 };
-
-
-// view all submit form data
-export async function submitContact(data) {
-  const res = await fetch(`${API}/api/contact`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  const result = await res.json();
-
-  if (!res.ok) {
-    throw new Error(result.message || "Failed to submit contact form");
-  }
-
-  return result;
-}
