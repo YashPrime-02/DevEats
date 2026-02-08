@@ -1,4 +1,14 @@
-const API = import.meta.env.VITE_API_URL;
+import React from 'react';
+  
+  const AdminService = () =>  {
+	return (
+	  <div>
+	  </div>
+	);
+  }
+  
+  export default AdminService;
+  const API = import.meta.env.VITE_API_URL;
 
 if (!API) {
   throw new Error("VITE_API_URL is not defined");
