@@ -1,11 +1,10 @@
 const pool = require("../config/db");
 
 // 📩 CREATE CONTACT MESSAGE
-exports.createContact = async (req, res, next) => {
+const createContact = async (req, res, next) => {
   try {
     const { name, email, message } = req.body;
 
-    // ✅ Validation
     if (!name || !email || !message) {
       return res.status(400).json({
         success: false,
@@ -46,10 +45,12 @@ exports.createContact = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Message stored successfully",
+      message: "Message submitted successfully",
       contact: result.rows[0],
     });
   } catch (err) {
     next(err);
   }
 };
+
+module.exports = { createContact };
