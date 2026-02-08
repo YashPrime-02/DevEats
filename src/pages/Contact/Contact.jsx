@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../styles/Contact.css";
+import { submitContact } from "../../Services/contactService";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -10,6 +11,7 @@ export default function Contact() {
 
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   // Validation rules
   const isNameValid = form.name.trim().length >= 3;
@@ -26,18 +28,24 @@ export default function Contact() {
     setTouched({ ...touched, [e.target.name]: true });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid) return;
 
-    setSubmitted(true);
+    try {
+      setSubmitted(true);
+      setError("");
 
-    // Simulated submit
-    setTimeout(() => {
+      await submitContact(form);
+
+      // ✅ Clear form after success
       setForm({ name: "", email: "", message: "" });
       setTouched({});
+    } catch (err) {
+      setError(err.message || "Failed to send message");
+    } finally {
       setSubmitted(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -111,6 +119,8 @@ export default function Contact() {
                 </span>
               )}
             </div>
+  
+              {error && <p className="error">{error}</p>}
 
             <button
               type="submit"
