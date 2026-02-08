@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/AdminDashboard.css";
+import { exportToExcel } from "../../utils/exportToExcel";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -26,15 +27,13 @@ export default function AdminDashboard() {
         Authorization: `Bearer ${token}`,
       };
 
-      const [usersRes, ordersRes, revenueRes, contactsRes] =
-        await Promise.all([
-          fetch(`${API}/api/admin/users`, { headers }),
-          fetch(`${API}/api/admin/orders`, { headers }),
-          fetch(`${API}/api/admin/revenue`, { headers }),
-          fetch(`${API}/api/admin/contacts`, { headers }),
-        ]);
+      const [usersRes, ordersRes, revenueRes, contactsRes] = await Promise.all([
+        fetch(`${API}/api/admin/users`, { headers }),
+        fetch(`${API}/api/admin/orders`, { headers }),
+        fetch(`${API}/api/admin/revenue`, { headers }),
+        fetch(`${API}/api/admin/contacts`, { headers }),
+      ]);
 
-      // 🚨 Handle auth failure
       if (!usersRes.ok) {
         throw new Error("Unauthorized or session expired");
       }
@@ -49,6 +48,43 @@ export default function AdminDashboard() {
       console.error("Admin dashboard error:", err);
       setError("Failed to load admin data");
     }
+  };
+
+  // ✅ Export helpers (clean data)
+  const exportUsers = () => {
+    const cleaned = users.map((u) => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      role: u.role,
+      joined: new Date(u.created_at).toLocaleString(),
+    }));
+
+    exportToExcel(cleaned, "admin_users");
+  };
+
+  const exportOrders = () => {
+    const cleaned = orders.map((o) => ({
+      id: o.id,
+      user: o.email,
+      total: Number(o.total_amount),
+      status: o.status,
+      date: new Date(o.created_at).toLocaleString(),
+    }));
+
+    exportToExcel(cleaned, "admin_orders");
+  };
+
+  const exportContacts = () => {
+    const cleaned = contacts.map((c) => ({
+      id: c.id,
+      name: c.name,
+      email: c.email,
+      message: c.message,
+      date: new Date(c.created_at).toLocaleString(),
+    }));
+
+    exportToExcel(cleaned, "admin_contacts");
   };
 
   return (
@@ -82,7 +118,13 @@ export default function AdminDashboard() {
 
       {/* Users */}
       <section className="admin-section">
-        <h2>Users</h2>
+        <div className="admin-section-header">
+          <h2>Users</h2>
+
+          <button className="admin-export-btn" onClick={exportUsers}>
+            Export Users (Excel)
+          </button>
+        </div>
 
         <div className="admin-table-wrap">
           <table className="admin-table">
@@ -111,7 +153,13 @@ export default function AdminDashboard() {
 
       {/* Orders */}
       <section className="admin-section">
-        <h2>Orders</h2>
+        <div className="admin-section-header">
+          <h2>Orders</h2>
+
+          <button className="admin-export-btn" onClick={exportOrders}>
+            Export Orders (Excel)
+          </button>
+        </div>
 
         <div className="admin-table-wrap">
           <table className="admin-table">
@@ -138,9 +186,15 @@ export default function AdminDashboard() {
         </div>
       </section>
 
-      {/* Contact Messages (NEW) */}
+      {/* Contact Messages */}
       <section className="admin-section">
-        <h2>Contact Messages</h2>
+        <div className="admin-section-header">
+          <h2>Contact Messages</h2>
+
+          <button className="admin-export-btn" onClick={exportContacts}>
+            Export Contacts (Excel)
+          </button>
+        </div>
 
         {contacts.length === 0 ? (
           <p className="admin-empty">No messages found.</p>

@@ -66,6 +66,15 @@ const authLimiter = rateLimit({
 
 app.use("/api/auth", authLimiter, authRoutes);
 
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "API is healthy",
+    time: new Date().toISOString(),
+  });
+});
+
+
 // Other routes
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
