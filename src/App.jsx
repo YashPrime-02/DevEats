@@ -21,8 +21,8 @@ const DisclaimerWrapper = lazy(() => import("./pages/Disclaimer/DisclaimerWrappe
 const OrderHistory = lazy(() => import("./pages/Orders/OrderHistory"));
 const OrderDetail = lazy(() => import("./pages/Orders/OrderDetail"));
 const AdminOrders = lazy(() => import("./pages/Admin/AdminOrders"));
-// Components
 
+// Components
 import PageLoader from "./components/PageLoader";
 import ScrollToTop from "./components/ScrollToTop";
 import AuthGuard from "./components/Guards/AuthGuard";
