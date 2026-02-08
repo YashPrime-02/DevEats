@@ -33,6 +33,7 @@ The project focuses on real-world architecture, clean UI/UX, accessibility, and 
 - 📦 View all orders
 - 💰 Revenue stats
 - 🧾 Admin order management page (frontend)
+- 📊 View All Contact Form Responses
 
 ---
 
