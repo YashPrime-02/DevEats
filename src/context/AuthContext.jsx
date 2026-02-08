@@ -7,13 +7,21 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔄 Load user from token on first load
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setUser(decoded);
+
+        // Optional: expire check
+        if (decoded.exp && Date.now() >= decoded.exp * 1000) {
+          localStorage.removeItem("token");
+          setUser(null);
+        } else {
+          setUser(decoded);
+        }
       } catch (err) {
         localStorage.removeItem("token");
         setUser(null);
@@ -32,7 +40,6 @@ export function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    setCart([]); 
   };
 
   return (
