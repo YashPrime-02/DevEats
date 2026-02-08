@@ -8,5 +8,6 @@ const controller = require("../controllers/adminController");
 router.get("/users", auth, admin, controller.getUsers);
 router.get("/orders", auth, admin, controller.getOrders); 
 router.get("/revenue", auth, admin, controller.getRevenue);
+router.get("/contacts", auth, admin, controller.getContacts);
 
 module.exports = router;

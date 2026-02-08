@@ -1,77 +1,7 @@
-.admin {
-  padding: 40px;
-  background: black;
-  color: #ffffff;
-  min-height: 100vh;
-}
-
-.admin h1 {
-  font-family: "Oswald", sans-serif;
-  color: #f7be27;
-  margin-bottom: 30px;
-  margin-top: 5%;
-}
-
-.admin-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.card {
-  background: #111;
-  border: 2px solid #f7be27;
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-section {
-  margin-top: 40px;
-}
-
-section h2 {
-  color: #e3000e;
-  margin-bottom: 15px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #111;
-}
-
-th,
-td {
-  padding: 12px;
-  border-bottom: 1px solid #333;
-  text-align: left;
-}
-
-th {
-  background: #f7be27;
-  color: black;
-}
-
-.admin-role {
-  color: #f7be27;
-  font-weight: bold;
-}
-
-
 /* ===============================
    ADMIN – LIGHT MODE (DEFAULT)
 ================================ */
+
 .admin {
   padding: 40px;
   background: #f9f9f9;
@@ -83,12 +13,27 @@ th {
   font-family: "Oswald", sans-serif;
   color: #e3000e;
   margin-bottom: 30px;
+  margin-top: 5%;
 }
 
-/* Stats grid */
+/* Error */
+.admin .error {
+  background: rgba(227, 0, 14, 0.08);
+  border: 1px solid rgba(227, 0, 14, 0.3);
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #e3000e;
+  font-weight: 600;
+}
+
+/* ===============================
+   STATS GRID
+================================ */
+
 .admin-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   margin-bottom: 40px;
 }
@@ -97,64 +42,104 @@ th {
 .card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 20px;
+  padding: 22px;
   text-align: center;
-  border-radius: 10px;
-
+  border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
 .card h3 {
   margin-bottom: 10px;
   color: #333;
+  font-size: 15px;
+  letter-spacing: 0.3px;
 }
 
 .card p {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 26px;
+  font-weight: 800;
   color: #e3000e;
+  margin: 0;
 }
 
-/* Sections */
-section {
+/* ===============================
+   SECTIONS
+================================ */
+
+.admin-section {
   margin-top: 40px;
 }
 
-section h2 {
+.admin-section h2 {
   color: #e3000e;
   margin-bottom: 15px;
+  font-size: 20px;
 }
 
-/* Tables */
-table {
+/* Empty text */
+.admin-empty {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+/* ===============================
+   TABLES
+================================ */
+
+/* Wrapper for responsive horizontal scroll */
+.admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+}
+
+/* Table */
+.admin-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
+  min-width: 850px;
 }
 
-th,
-td {
+.admin-table th,
+.admin-table td {
   padding: 12px;
   border-bottom: 1px solid #eaeaea;
   text-align: left;
+  font-size: 14px;
+  vertical-align: top;
 }
 
-th {
+.admin-table th {
   background: #f7be27;
   color: #000000;
-  font-weight: 600;
+  font-weight: 700;
 }
 
+/* Hover row */
+.admin-table tbody tr:hover td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Role highlight */
 .admin-role {
   color: #e3000e;
-  font-weight: bold;
+  font-weight: 800;
+}
+
+/* Message column (Contact Messages) */
+.admin-message {
+  max-width: 420px;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
 }
 
 /* ===============================
    ADMIN – DARK MODE
 ================================ */
+
 body.dark .admin {
   background: #0f0f0f;
   color: #ffffff;
@@ -164,11 +149,16 @@ body.dark .admin h1 {
   color: #f7be27;
 }
 
+body.dark .admin .error {
+  background: rgba(247, 190, 39, 0.08);
+  border: 1px solid rgba(247, 190, 39, 0.35);
+  color: #f7be27;
+}
+
 /* Dark cards */
 body.dark .card {
   background: #111111;
-  border: 1px solid rgba(247, 190, 39, 0.4);
-
+  border: 1px solid rgba(247, 190, 39, 0.35);
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -183,25 +173,71 @@ body.dark .card p {
 }
 
 /* Dark section headings */
-body.dark section h2 {
+body.dark .admin-section h2 {
   color: #e3000e;
 }
 
 /* Dark tables */
-body.dark table {
+body.dark .admin-table-wrap {
+  background: #111111;
+  border: 1px solid rgba(247, 190, 39, 0.25);
+}
+
+body.dark .admin-table {
   background: #111111;
 }
 
-body.dark th {
+body.dark .admin-table th {
   background: #f7be27;
   color: #000000;
 }
 
-body.dark td {
+body.dark .admin-table td {
   border-bottom: 1px solid #333333;
 }
 
-/* Role highlight */
+body.dark .admin-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Role highlight in dark */
 body.dark .admin-role {
   color: #f7be27;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .admin {
+    padding: 26px 16px;
+  }
+
+  .admin h1 {
+    font-size: 24px;
+    margin-top: 70px;
+  }
+
+  .card p {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin h1 {
+    font-size: 20px;
+  }
+
+  .admin-section h2 {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .card p {
+    font-size: 20px;
+  }
 }
