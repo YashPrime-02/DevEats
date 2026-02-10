@@ -52,12 +52,20 @@ export default function About() {
             aria-live="polite"
             aria-label="DevEats in multiple languages"
           >
-            <span>DevEats</span>
-            <span>योमाटो</span>
-            <span>யோமாடோ</span>
-            <span>ヨマト</span>
-            <span>요마토</span>
-            <span>DevEats</span>
+            <span>DevEats</span> {/* English */}
+            <span>डेवईट्स</span> {/* Hindi */}
+            <span>દેવઈટ્સ</span> {/* Gujarati */}
+            <span>দেভইটস</span> {/* Bengali */}
+            <span>देवईट्स</span> {/* Marathi */}
+            <span>ಡೇವೀಟ್ಸ್</span> {/* Kannada */}
+            <span>డెవీట్స్</span> {/* Telugu */}
+            <span>ഡെവീട്സ്</span> {/* Malayalam */}
+            <span>ਡੈਵਈਟਸ</span> {/* Punjabi */}
+            <span>ડેવઈટ્સ</span> {/* Gujarati (optional repeat) */}
+            <span>டெவீட்ஸ்</span> {/* Tamil */}
+            <span>デブイーツ</span> {/* Japanese */}
+            <span>데브이츠</span> {/* Korean */}
+            <span>DevEats</span> {/* English (repeat for loop animation) */}
           </span>
         </h2>
 
