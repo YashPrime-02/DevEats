@@ -4,6 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const contactRoutes = require("./routes/contactRoutes");
+const { sendOtpEmail } = require(".././src/utils/sendEmail");
 
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
@@ -83,6 +84,18 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/contact", contactRoutes);
 
 app.use(errorHandler);
+
+
+app.get("/test-email", async (req, res) => {
+  try {
+    await sendOtpEmail("YOUR_EMAIL@gmail.com", "123456");
+    res.json({ success: true, message: "Email sent" });
+  } catch (err) {
+    console.error("EMAIL ERROR:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 
