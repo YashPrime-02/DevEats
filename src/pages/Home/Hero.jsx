@@ -22,7 +22,7 @@ export default function Section1() {
               {/* Price Badge */}
               <div className="hero__price-badge">
                 <span>ONLY</span>
-                <strong>$6.99</strong>
+                <strong>₹69</strong>
               </div>
             </div>
           </div>
