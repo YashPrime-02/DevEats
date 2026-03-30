@@ -1,0 +1,42 @@
+services:
+
+  db:
+    image: postgres:15-alpine
+    container_name: deveats_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: yomato_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./Backend
+    container_name: deveats_backend
+    ports:
+      - "3001:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: admin
+      DB_NAME: yomato_db
+      JWT_SECRET: supersecret
+      JWT_EXPIRES_IN: 1d
+      NODE_ENV: development
+      ALLOWED_ORIGINS: http://localhost:5173,https://food-delivary-app-jet.vercel.app
+    depends_on:
+      - db
+
+  frontend:
+    build: .
+    container_name: deveats_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
