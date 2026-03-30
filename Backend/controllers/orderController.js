@@ -1,5 +1,7 @@
 const pool = require("../config/db");
 
+console.log("🔥 USING ORDER CONTROLLER (LATEST)");
+
 // 🧾 PLACE ORDER
 exports.placeOrder = async (req, res, next) => {
   const client = await pool.connect();
@@ -11,11 +13,12 @@ exports.placeOrder = async (req, res, next) => {
 
     // 1️⃣ Get active cart
     const cartResult = await client.query(
-      "SELECT id FROM carts WHERE user_id=$1 AND status='active'",
+      "SELECT id FROM public.carts WHERE user_id=$1 AND status='active'",
       [userId]
     );
 
     if (cartResult.rows.length === 0) {
+      await client.query("ROLLBACK");
       return res.status(400).json({
         success: false,
         message: "No active cart found",
@@ -26,11 +29,12 @@ exports.placeOrder = async (req, res, next) => {
 
     // 2️⃣ Get cart items
     const itemsResult = await client.query(
-      "SELECT * FROM cart_items WHERE cart_id=$1",
+      "SELECT * FROM public.cart_items WHERE cart_id=$1",
       [cartId]
     );
 
     if (itemsResult.rows.length === 0) {
+      await client.query("ROLLBACK");
       return res.status(400).json({
         success: false,
         message: "Cart is empty",
@@ -41,14 +45,15 @@ exports.placeOrder = async (req, res, next) => {
 
     // 3️⃣ Calculate total
     const totalAmount = items.reduce(
-      (sum, item) => sum + Number(item.price) * Number(item.quantity),
+      (sum, item) =>
+        sum + Number(item.price || 0) * Number(item.quantity || 0),
       0
     );
 
     // 4️⃣ Create order
     const orderResult = await client.query(
       `
-      INSERT INTO orders (user_id, total_amount, status)
+      INSERT INTO public.orders (user_id, total_amount, status)
       VALUES ($1, $2, 'placed')
       RETURNING id, total_amount, status, created_at
       `,
@@ -62,7 +67,7 @@ exports.placeOrder = async (req, res, next) => {
     for (const item of items) {
       await client.query(
         `
-        INSERT INTO order_items
+        INSERT INTO public.order_items
           (order_id, external_item_id, name, price, image_url, quantity)
         VALUES
           ($1,$2,$3,$4,$5,$6)
@@ -80,7 +85,7 @@ exports.placeOrder = async (req, res, next) => {
 
     // 6️⃣ Mark cart converted
     await client.query(
-      "UPDATE carts SET status='converted' WHERE id=$1",
+      "UPDATE public.carts SET status='converted' WHERE id=$1",
       [cartId]
     );
 
@@ -97,6 +102,7 @@ exports.placeOrder = async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.error("🔥 PLACE ORDER ERROR:", err);
     await client.query("ROLLBACK");
     next(err);
   } finally {
@@ -112,7 +118,7 @@ exports.getOrders = async (req, res, next) => {
     const result = await pool.query(
       `
       SELECT id, total_amount, status, created_at
-      FROM orders
+      FROM public.orders
       WHERE user_id = $1
       ORDER BY created_at DESC
       `,
@@ -133,11 +139,12 @@ exports.getOrderById = async (req, res, next) => {
 
     const result = await pool.query(
       `
-      SELECT o.id, o.total_amount, o.status, o.created_at,
-             oi.id as order_item_id,
-             oi.external_item_id, oi.name, oi.price, oi.image_url, oi.quantity
-      FROM orders o
-      JOIN order_items oi ON o.id = oi.order_id
+      SELECT 
+        o.id, o.total_amount, o.status, o.created_at,
+        oi.id as order_item_id,
+        oi.external_item_id, oi.name, oi.price, oi.image_url, oi.quantity
+      FROM public.orders o
+      JOIN public.order_items oi ON o.id = oi.order_id
       WHERE o.user_id = $1 AND o.id = $2
       ORDER BY oi.id DESC
       `,

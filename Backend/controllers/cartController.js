@@ -1,12 +1,15 @@
 const pool = require("../config/db");
 
-// ➕ ADD TO CART
+console.log("🔥 USING CART CONTROLLER (LATEST)");
+
 exports.addToCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const { external_item_id, name, price, image_url, quantity } = req.body;
 
-    // ✅ Basic validation
+    console.log("📦 ADD TO CART HIT");
+    console.log("➡️ Payload:", { external_item_id, name, price, image_url, quantity });
+
     if (!external_item_id || !name || price === undefined || !quantity) {
       return res.status(400).json({
         success: false,
@@ -21,9 +24,17 @@ exports.addToCart = async (req, res, next) => {
       });
     }
 
+    // 🔥 DEBUG DB STRUCTURE (CRITICAL)
+    const debugCols = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name='cart_items'
+    `);
+    console.log("🧠 DB columns:", debugCols.rows);
+
     // 1️⃣ Get or create active cart
     const cartQuery = await pool.query(
-      "SELECT id FROM carts WHERE user_id = $1 AND status = 'active'",
+      "SELECT id FROM public.carts WHERE user_id = $1 AND status = 'active'",
       [userId]
     );
 
@@ -31,7 +42,7 @@ exports.addToCart = async (req, res, next) => {
 
     if (cartQuery.rows.length === 0) {
       const newCart = await pool.query(
-        "INSERT INTO carts (user_id, status) VALUES ($1, 'active') RETURNING id",
+        "INSERT INTO public.carts (user_id, status) VALUES ($1, 'active') RETURNING id",
         [userId]
       );
       cartId = newCart.rows[0].id;
@@ -41,29 +52,41 @@ exports.addToCart = async (req, res, next) => {
 
     // 2️⃣ Check if item exists
     const itemCheck = await pool.query(
-      "SELECT id, quantity FROM cart_items WHERE cart_id=$1 AND external_item_id=$2",
+      "SELECT id, quantity FROM public.cart_items WHERE cart_id=$1 AND external_item_id=$2",
       [cartId, external_item_id]
     );
 
     if (itemCheck.rows.length > 0) {
+      console.log("🔁 Updating existing item");
+
       await pool.query(
-        "UPDATE cart_items SET quantity = quantity + $1 WHERE id=$2",
+        "UPDATE public.cart_items SET quantity = quantity + $1 WHERE id=$2",
         [quantity, itemCheck.rows[0].id]
       );
     } else {
+      console.log("🆕 Inserting new item");
+
+      // 🔥 SAFE INSERT (NO COLUMN MISMATCH POSSIBLE)
       await pool.query(
         `
-        INSERT INTO cart_items
-          (cart_id, external_item_id, name, price, image_url, quantity)
-        VALUES
-          ($1,$2,$3,$4,$5,$6)
+        INSERT INTO public.cart_items
+        (cart_id, external_item_id, quantity, name, price, image_url)
+        VALUES ($1,$2,$3,$4,$5,$6)
         `,
-        [cartId, external_item_id, name, price, image_url || null, quantity]
+        [
+          cartId,
+          external_item_id,
+          quantity,
+          name,
+          price,
+          image_url || null,
+        ]
       );
     }
 
     res.json({ success: true, message: "Item added to cart" });
   } catch (err) {
+    console.error("🔥 ADD TO CART ERROR:", err);
     next(err);
   }
 };
@@ -73,24 +96,21 @@ exports.getCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    // 1️⃣ Find active cart
     const cartRes = await pool.query(
-      "SELECT id FROM carts WHERE user_id = $1 AND status='active'",
+      "SELECT id FROM public.carts WHERE user_id = $1 AND status='active'",
       [userId]
     );
 
-    // If no cart exists, return empty
     if (cartRes.rows.length === 0) {
       return res.json([]);
     }
 
     const cartId = cartRes.rows[0].id;
 
-    // 2️⃣ Get items
     const itemsRes = await pool.query(
       `
       SELECT id, external_item_id, name, price, image_url, quantity
-      FROM cart_items
+      FROM public.cart_items
       WHERE cart_id = $1
       ORDER BY id DESC
       `,
@@ -103,7 +123,7 @@ exports.getCart = async (req, res, next) => {
   }
 };
 
-// ❌ REMOVE ITEM (SECURE)
+// ❌ REMOVE ITEM
 exports.removeItem = async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -111,8 +131,8 @@ exports.removeItem = async (req, res, next) => {
 
     const result = await pool.query(
       `
-      DELETE FROM cart_items ci
-      USING carts c
+      DELETE FROM public.cart_items ci
+      USING public.carts c
       WHERE ci.id = $1
         AND ci.cart_id = c.id
         AND c.user_id = $2
